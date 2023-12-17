@@ -64,7 +64,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .header-logo {
@@ -138,9 +137,53 @@ header {
     color: #5D3F3D;
 }
 
-.menu-mobile,
-.menu-btn {
+.mobile-menu{
     display: none;
+}
+
+.menu-btn {
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+    color: #fff;
+    text-align: center;
+    display: none;
+}
+
+.btn-fechar{
+    margin: 0 0 20px 20px;
+    cursor: pointer;
+}
+
+.btn-fechar > img{
+    width: 25px;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #232222;
+    padding-top: 60px;
+    transition: 0.5s;
+    z-index: 99999;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-menu li {
+    padding: 15px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.mobile-menu-item:hover{
+    background-color: #5D3F3D;
 }
 
 .banner {
@@ -186,7 +229,7 @@ header {
 
 .beneficios {
     background-color: #5D3F3D;
-    height: 230px;
+    min-height: 230px;
 }
 
 .beneficios-itens {
@@ -262,13 +305,14 @@ header {
 .swiper {
     max-width: 1350px;
     margin-top: 30px;
+    display: flex;
+    gap: 20px;
 }
 
 .container {
     display: flex;
     max-width: 1200px;
-    margin: -10px 0 20px 40px;
-    gap: 40px;
+    margin: -10px 0 20px 0px;
 }
 
 .box {
@@ -388,6 +432,7 @@ span.swiper-pagination-bullet {
 .swiper-button-prev::after{
     color: #5D3F3D;
 }
+
 .swiper-button-next::after{
     color: #5D3F3D;
 }
@@ -485,7 +530,7 @@ span.swiper-pagination-bullet {
 
 .produtos-destaque-item {
     background-color: #fff;
-    height: 430px;
+    max-height: 430px;
     width: 430px;
     display: flex;
     flex-direction: column;
@@ -518,7 +563,7 @@ span.swiper-pagination-bullet {
     cursor: pointer;
     background-color: #000000;
     color: #fff;
-    margin: 30px 0 0 20px;
+    margin: 30px 0 20px 20px;
     height: 50px;
     width: 390px;
     font-size: 25px;
@@ -594,4 +639,258 @@ footer hr {
     align-items: center;
     justify-content: center;
     margin: 20px 0;
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px) {
+    
+    .menu-desktop{
+        display: none;
+    }
+
+    .header-logo{
+        margin-left: 30px;
+    }
+
+    .menu{
+        margin-right: 30px;
+    }
+    .mobile-menu{
+        display: block;
+    }
+
+    .menu-btn{
+        display: block;
+    }
+
+    .banner{
+        flex-direction: column;
+        background-image: url("../images/banner.png");
+        margin: 0;
+        background-size: cover;
+    }
+
+    .banner-content{
+        margin: 370px 0 0 0;
+        flex-direction: row;
+        gap:20px;
+    }
+
+    .banner-content h1{
+        font-size: 40px;
+    }
+
+    .banner-content h2{
+        font-size: 16px;
+    }
+
+    .btn{
+        width: 100px;
+        font-size: 20px;
+    }
+
+    .beneficios{
+        height: 730px;
+        margin-bottom: 20px;
+    }
+
+    .beneficios-itens{
+        flex-direction: column;
+    }
+
+    .beneficios-item{
+        margin-left: 10%;
+    }
+
+    .vitrine-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .marcas{
+        flex-direction: column;
+        gap:0;
+    }
+
+    .marcas-destaque-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .marcas img{
+        margin-bottom: 80px;
+    }
+
+    .produtos-destaque-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .produtos-destaque-itens{
+        flex-direction: column;
+    }
+
+    .produtos-destaque-item{
+        width: 350px;
+    }
+
+    .produtos-destaque-item-main img{
+        width: 150px;
+    }
+
+    .produtos-destaque-item-main{
+        gap:20px;
+    }
+
+    .botao-produto{
+        width: 310px;
+        margin-bottom: 20px;
+    }
+
+    .footer-principal{
+        flex-direction: column;
+        margin: 0 30px 20px 30px;
+    }
+
+    .locais{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .locais-item > div{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .locais-item div > span{
+        margin-top: 5px;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+    
+    .menu-desktop{
+        display: none;
+    }
+
+    .header-logo{
+        margin-left: 30px;
+    }
+
+    .menu{
+        margin-right: 30px;
+    }
+    .mobile-menu{
+        display: block;
+    }
+
+    .menu-btn{
+        display: block;
+    }
+
+    .banner{
+        flex-direction: column;
+        background-image: url("../images/banner11.png");
+        margin: 0;
+        background-size: cover;
+    }
+
+    .banner-content{
+        margin: 100px 0 0 30px;
+        flex-direction: column;
+        gap:20px;
+    }
+
+    .banner-content h1{
+        font-size: 40px;
+    }
+
+    .banner-content h2{
+        font-size: 16px;
+    }
+
+    .btn{
+        width: 100px;
+        font-size: 20px;
+    }
+
+    .beneficios{
+        height: 730px;
+        margin-bottom: 20px;
+    }
+
+    .beneficios-itens{
+        flex-direction: column;
+    }
+
+    .beneficios-item{
+        margin-left: 10%;
+    }
+
+    .vitrine-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .marcas{
+        flex-direction: column;
+        gap:0;
+    }
+
+    .marcas-destaque-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .marcas img{
+        margin-bottom: 80px;
+    }
+
+    .produtos-destaque-header{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .produtos-destaque-itens{
+        flex-direction: column;
+    }
+
+    .produtos-destaque-item{
+        width: 350px;
+    }
+
+    .produtos-destaque-item-main img{
+        width: 150px;
+    }
+
+    .produtos-destaque-item-main{
+        gap:20px;
+    }
+
+    .botao-produto{
+        width: 310px;
+        margin-bottom: 20px;
+    }
+
+    .footer-principal{
+        flex-direction: column;
+        margin: 0 30px 20px 30px;
+    }
+
+    .locais{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .locais-item > div{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .locais-item div > span{
+        margin-top: 5px;
+    }
 }

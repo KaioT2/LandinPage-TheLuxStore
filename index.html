@@ -88,21 +88,24 @@
                 </ul>
             </nav>
 
-            <div class="menu-btn">
+            <div class="menu-btn" id="menu-btn">
                 <img src="images/menuIcon.png" alt="menu" class="icone">
             </div>
 
-            <nav class="menu-mobile">
+            <nav class="mobile-menu" id="mobile-menu">
 
                 <div class="btn-fechar" id="btn-fechar">
                     <img src="images/x.png" alt="menu" class="icone">
                 </div>
 
                 <ul>
-                    <li><a href="#">Moda Masculina</a></li>
-                    <li><a href="#">Moda feminina</a></li>
-                    <li><a href="#">Calçados</a></li>
-                    <li><a href="#">Acessórios</a></li>
+                    <a href="#"><li class="mobile-menu-item">Moda masculina</li></a>
+
+                    <a href="#"><li class="mobile-menu-item">Moda feminina</li></a>
+
+                    <a href="#"><li class="mobile-menu-item">Acessórios</li></a>
+
+                    <a href="#"><li class="mobile-menu-item">Calçados</li></a>
                 </ul>
             </nav>
         </nav>
@@ -111,9 +114,11 @@
     <main>
         <div class="banner">
             <div class="banner-content">
-                <h1>40% off</h1>
-                <h2>coleção de <br>outono</h2>
-                <h2>masculina</h2>
+                <div class="banner-texto">
+                    <h1>40% off</h1>
+                    <h2>coleção de <br>outono</h2>
+                    <h2>masculina</h2>
+                </div>
 
                 <div class="banner-btn">
                     <a href="#"><button type="button" class="btn">Comprar agora</button></a>
@@ -138,7 +143,7 @@
 
                 <div class="beneficios-item">
                     <div class="imagem">
-                        <img src="images/tag.png" preco baixo">
+                        <img src="images/tag.png" alt="preco baixo">
                     </div>
                     <div>
                         <h2>Preço baixo</h2>
@@ -190,6 +195,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/02.png" alt="relogio">
@@ -208,6 +217,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/03.png" alt="relogio">
@@ -226,6 +239,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/04.png" alt="relogio">
@@ -266,6 +283,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/06.png" alt="relogio">
@@ -284,6 +305,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/07.png" alt="relogio">
@@ -302,6 +327,10 @@
                                     <a href="#" class="preco">$20</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="container">
                             <div class="box">
                                 <div class="slide-img">
                                     <img src="images/08.png" alt="relogio">
@@ -322,12 +351,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
             </div>
         </div>
 
@@ -448,23 +474,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    <!-- Initialize Swiper -->
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    </script>
-    <script src="js/script.js"></script>
+    
 </body>
-
+    <script src="js/script.js"></script>
 </html>
