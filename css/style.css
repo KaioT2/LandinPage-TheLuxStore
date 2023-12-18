@@ -485,7 +485,7 @@ span.swiper-pagination-bullet {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0 80px 80px 80px;
+    margin: 20px 80px 80px 80px;
 }
 
 .divisao hr {
@@ -656,6 +656,7 @@ footer hr {
     }
     .mobile-menu{
         display: block;
+        font-size: 20px;
     }
 
     .menu-btn{
@@ -689,7 +690,7 @@ footer hr {
     }
 
     .beneficios{
-        height: 730px;
+        height: 620px;
         margin-bottom: 20px;
     }
 
@@ -697,8 +698,14 @@ footer hr {
         flex-direction: column;
     }
 
+    .beneficios-item > div > h3{
+        display: none;
+    }
+
     .beneficios-item{
-        margin-left: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .vitrine-header{
@@ -781,8 +788,10 @@ footer hr {
     .menu{
         margin-right: 30px;
     }
+
     .mobile-menu{
         display: block;
+        font-size: 20px;
     }
 
     .menu-btn{
@@ -816,7 +825,7 @@ footer hr {
     }
 
     .beneficios{
-        height: 730px;
+        height: 620px;
         margin-bottom: 20px;
     }
 
@@ -826,6 +835,8 @@ footer hr {
 
     .beneficios-item{
         margin-left: 10%;
+        display: flex;
+        align-items: center;
     }
 
     .vitrine-header{
@@ -874,7 +885,7 @@ footer hr {
     }
 
     .footer-principal{
-        flex-direction: column;
+        flex-direction: row;
         margin: 0 30px 20px 30px;
     }
 
