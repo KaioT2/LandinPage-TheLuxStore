@@ -11,7 +11,7 @@ O projeto tem total responsividade e traz consigo recursos de vitrine responsív
 ## ⚙️Pré-Requisitos:
 Para acessar o código do projeto aconcelha-se que tenha um editor de código como VsCode com a extensão do Live-Server;
 
-🛠️Guia de instalação:
+## 🛠️Guia de instalação:
 1 - No repositório do projeto vá até code -> download zip ;
 
 2 - No seu gerenciador de arquivos vá até downloads -> extraia o arquivo zip baixado -> abra com seu editor de código;
