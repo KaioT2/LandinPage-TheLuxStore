@@ -2,6 +2,7 @@
 
 ::-webkit-scrollbar {
     width: 12px;
+    height: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -137,7 +138,7 @@ header {
     color: #5D3F3D;
 }
 
-.mobile-menu{
+.mobile-menu {
     display: none;
 }
 
@@ -150,12 +151,12 @@ header {
     display: none;
 }
 
-.btn-fechar{
+.btn-fechar {
     margin: 0 0 20px 20px;
     cursor: pointer;
 }
 
-.btn-fechar > img{
+.btn-fechar>img {
     width: 25px;
 }
 
@@ -182,7 +183,7 @@ header {
     margin-right: 10px;
 }
 
-.mobile-menu-item:hover{
+.mobile-menu-item:hover {
     background-color: #5D3F3D;
 }
 
@@ -307,12 +308,13 @@ header {
     margin-top: 30px;
     display: flex;
     gap: 20px;
+    overflow: none;
 }
 
 .container {
     display: flex;
     max-width: 1200px;
-    margin: -10px 0 20px 0px;
+    margin: 0px 0 20px 0px;
 }
 
 .box {
@@ -429,11 +431,11 @@ span.swiper-pagination-bullet {
     border-radius: 25px;
 }
 
-.swiper-button-prev::after{
+.swiper-button-prev::after {
     color: #5D3F3D;
 }
 
-.swiper-button-next::after{
+.swiper-button-next::after {
     color: #5D3F3D;
 }
 
@@ -642,266 +644,268 @@ footer hr {
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
-    
-    .menu-desktop{
+
+    .menu-desktop {
         display: none;
     }
 
-    .header-logo{
+    .header-logo {
         margin-left: 30px;
     }
 
-    .menu{
+    .menu {
         margin-right: 30px;
     }
-    .mobile-menu{
+
+    .mobile-menu {
         display: block;
         font-size: 20px;
     }
 
-    .menu-btn{
+    .menu-btn {
         display: block;
     }
 
-    .banner{
+    .banner {
         flex-direction: column;
         background-image: url("../images/banner.png");
         margin: 0;
         background-size: cover;
     }
 
-    .banner-content{
+    .banner-content {
         margin: 370px 0 0 0;
         flex-direction: row;
-        gap:20px;
+        gap: 20px;
     }
 
-    .banner-content h1{
+    .banner-content h1 {
         font-size: 40px;
     }
 
-    .banner-content h2{
+    .banner-content h2 {
         font-size: 16px;
     }
 
-    .btn{
+    .btn {
         width: 100px;
         font-size: 20px;
     }
 
-    .beneficios{
+    .beneficios {
         height: 620px;
         margin-bottom: 20px;
     }
 
-    .beneficios-itens{
+    .beneficios-itens {
         flex-direction: column;
     }
 
-    .beneficios-item > div > h3{
+    .beneficios-item>div>h3 {
         display: none;
     }
 
-    .beneficios-item{
+    .beneficios-item {
         display: flex;
         justify-content: center;
         align-items: center;
+        word-wrap: break-word;
     }
 
-    .vitrine-header{
+    .vitrine-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .marcas{
+    .marcas {
         flex-direction: column;
-        gap:0;
+        gap: 0;
     }
 
-    .marcas-destaque-header{
+    .marcas-destaque-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .marcas img{
+    .marcas img {
         margin-bottom: 80px;
     }
 
-    .produtos-destaque-header{
+    .produtos-destaque-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .produtos-destaque-itens{
+    .produtos-destaque-itens {
         flex-direction: column;
     }
 
-    .produtos-destaque-item{
+    .produtos-destaque-item {
         width: 350px;
     }
 
-    .produtos-destaque-item-main img{
+    .produtos-destaque-item-main img {
         width: 150px;
     }
 
-    .produtos-destaque-item-main{
-        gap:20px;
+    .produtos-destaque-item-main {
+        gap: 20px;
     }
 
-    .botao-produto{
+    .botao-produto {
         width: 310px;
         margin-bottom: 20px;
     }
 
-    .footer-principal{
+    .footer-principal {
         flex-direction: column;
         margin: 0 30px 20px 30px;
     }
 
-    .locais{
+    .locais {
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
-    .locais-item > div{
+    .locais-item>div {
         display: flex;
         flex-direction: row;
         gap: 20px;
     }
 
-    .locais-item div > span{
+    .locais-item div>span {
         margin-top: 5px;
     }
 }
 
 @media screen and (min-width: 700px) and (max-width: 1000px) {
-    
-    .menu-desktop{
+
+    .menu-desktop {
         display: none;
     }
 
-    .header-logo{
+    .header-logo {
         margin-left: 30px;
     }
 
-    .menu{
+    .menu {
         margin-right: 30px;
     }
 
-    .mobile-menu{
+    .mobile-menu {
         display: block;
         font-size: 20px;
     }
 
-    .menu-btn{
+    .menu-btn {
         display: block;
     }
 
-    .banner{
+    .banner {
         flex-direction: column;
         background-image: url("../images/banner11.png");
         margin: 0;
         background-size: cover;
     }
 
-    .banner-content{
+    .banner-content {
         margin: 100px 0 0 30px;
         flex-direction: column;
-        gap:20px;
+        gap: 20px;
     }
 
-    .banner-content h1{
+    .banner-content h1 {
         font-size: 40px;
     }
 
-    .banner-content h2{
+    .banner-content h2 {
         font-size: 16px;
     }
 
-    .btn{
+    .btn {
         width: 100px;
         font-size: 20px;
     }
 
-    .beneficios{
+    .beneficios {
         height: 620px;
         margin-bottom: 20px;
     }
 
-    .beneficios-itens{
+    .beneficios-itens {
         flex-direction: column;
     }
 
-    .beneficios-item{
+    .beneficios-item {
         margin-left: 10%;
         display: flex;
         align-items: center;
     }
 
-    .vitrine-header{
+    .vitrine-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .marcas{
+    .marcas {
         flex-direction: column;
-        gap:0;
+        gap: 0;
     }
 
-    .marcas-destaque-header{
+    .marcas-destaque-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .marcas img{
+    .marcas img {
         margin-bottom: 80px;
     }
 
-    .produtos-destaque-header{
+    .produtos-destaque-header {
         font-size: 20px;
         text-align: center;
     }
 
-    .produtos-destaque-itens{
+    .produtos-destaque-itens {
         flex-direction: column;
     }
 
-    .produtos-destaque-item{
+    .produtos-destaque-item {
         width: 350px;
     }
 
-    .produtos-destaque-item-main img{
+    .produtos-destaque-item-main img {
         width: 150px;
     }
 
-    .produtos-destaque-item-main{
-        gap:20px;
+    .produtos-destaque-item-main {
+        gap: 20px;
     }
 
-    .botao-produto{
+    .botao-produto {
         width: 310px;
         margin-bottom: 20px;
     }
 
-    .footer-principal{
+    .footer-principal {
         flex-direction: row;
         margin: 0 30px 20px 30px;
     }
 
-    .locais{
+    .locais {
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
-    .locais-item > div{
+    .locais-item>div {
         display: flex;
         flex-direction: row;
         gap: 20px;
     }
 
-    .locais-item div > span{
+    .locais-item div>span {
         margin-top: 5px;
     }
 }
