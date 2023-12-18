@@ -1,6 +1,6 @@
 ![The-Lux-Store](https://github.com/KaioT2/The-Lux-Store/assets/98715856/2f8b300b-1b85-4c76-a221-122f9016255a)
 
-## The Lux Store
+# The Lux Store
 Projeto em HTML, CSS e JavaScript de uma loja de roupas e acessórios.
 
 ## 📌Introdução:
