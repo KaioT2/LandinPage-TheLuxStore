@@ -43,7 +43,6 @@ var swiper = new Swiper(".mySwiper", {
 var bannerBtn = document.querySelector('.btn');
 
 function updateSwiper() {
-    // Verifique o tamanho da tela ou qualquer outra lógica que você preferir
     if (window.innerWidth < 768) {
         swiper.params.slidesPerView = 1; 
         bannerBtn.innerText = "Levar";
@@ -53,8 +52,6 @@ function updateSwiper() {
     } else {
         swiper.params.slidesPerView = 4; 
     }
-
-    // Atualize o swiper
     swiper.update();
 }
 
