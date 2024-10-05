@@ -67,19 +67,19 @@ header {
     justify-content: space-between;
 }
 
-.header-logo {
-    margin-left: 250px;
+.header-logo{
+    margin-right: 40px;
+    margin-left: 40px;
 }
 
 .header-logo img {
-    width: 80px;
+    width: 60px;
 }
 
 .menu {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    margin-right: 250px;
+    align-items: left;
 }
 
 .menu-desktop ul {
@@ -115,7 +115,7 @@ header {
     z-index: 1;
     font-family: 'Assistant', sans-serif;
     font-weight: 400;
-    height: 400px;
+    max-height: 400px;
     width: 200px;
 }
 
@@ -151,6 +151,10 @@ header {
     display: none;
 }
 
+.menu-btn img{
+    width: 25px;
+}
+
 .btn-fechar {
     margin: 0 0 20px 20px;
     cursor: pointer;
@@ -179,12 +183,23 @@ header {
 
 .mobile-menu li {
     padding: 15px;
-    text-align: right;
+    text-align: left;
     margin-right: 10px;
 }
 
 .mobile-menu-item:hover {
     background-color: #5D3F3D;
+}
+
+.user-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    margin-right: 50px;
+}
+
+.carrinho-btn a > img{
+    width: 40px;
 }
 
 .banner {
@@ -645,16 +660,22 @@ footer hr {
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
 
+    .header-logo img{
+        margin-top: 5px;
+        width: 55px;
+    }
+    
+
     .menu-desktop {
         display: none;
     }
 
     .header-logo {
-        margin-left: 30px;
+        margin-left: 10px;
     }
 
     .menu {
-        margin-right: 30px;
+        margin-right: 10px;
     }
 
     .mobile-menu {
@@ -664,6 +685,10 @@ footer hr {
 
     .menu-btn {
         display: block;
+    }
+
+    .carrinho-btn a > img{
+        width: 35px;
     }
 
     .banner {
@@ -786,11 +811,11 @@ footer hr {
     }
 
     .header-logo {
-        margin-left: 30px;
+        margin-left: 10px;
     }
 
     .menu {
-        margin-right: 30px;
+        margin-right: 10px;
     }
 
     .mobile-menu {

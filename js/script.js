@@ -5,22 +5,22 @@ document.addEventListener('DOMContentLoaded', function () {
     var content = document.querySelector('.content');
 
     menuBtn.addEventListener('click', function() {
-        if (mobileMenu.style.right === "-250px") {
-            mobileMenu.style.right = "0";
-            content.style.marginRight = "250px";
+        if (mobileMenu.style.left === "-250px") {
+            mobileMenu.style.left = "0";
+            content.style.marginLeft = "250px";
         } else {
-            mobileMenu.style.right = "-250px";
-            content.style.marginRight = "0";
+            mobileMenu.style.left = "-250px";
+            content.style.marginLeft = "0";
         }
     });
 
     menuBtnFechar.addEventListener('click', function() {
-        if (mobileMenu.style.right === "-250px") {
-            mobileMenu.style.right = "0";
-            content.style.marginRight = "250px";
+        if (mobileMenu.style.left === "-250px") {
+            mobileMenu.style.left = "0";
+            content.style.marginLeft = "250px";
         } else {
-            mobileMenu.style.right = "-250px";
-            content.style.marginRight = "0";
+            mobileMenu.style.left = "-250px";
+            content.style.marginLeft = "0";
         }
     });
 });
@@ -61,3 +61,4 @@ updateSwiper();
 window.addEventListener("resize", function () {
     updateSwiper();
 });
+
