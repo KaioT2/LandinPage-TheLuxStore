@@ -299,7 +299,7 @@ header {
     font-size: 10px;
 }
 
-.vitrine {
+.vitrine-destaque {
     margin-bottom: 10px;
 }
 
@@ -367,7 +367,7 @@ header {
     flex-direction: column;
 }
 
-.type a {
+.type p {
     color: #020815;
     margin: 5px 0;
     font-weight: 700;
@@ -508,6 +508,47 @@ span.swiper-pagination-bullet {
 .divisao hr {
     border: solid 1px #000;
     width: 95%;
+}
+
+.vitrine-principal{
+    display: flex;
+    flex-direction: column;
+}
+
+.vitrine-principal-header{
+    text-align: left;
+    margin-top: 10px;
+}
+
+.vitrine-principal-header > h2{
+    margin-left: 30px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-produto{
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.img-produto {
+    background-color: #e6e6e6;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-produto img{
+    max-height: 200px;
 }
 
 .produtos-destaque {
@@ -659,6 +700,11 @@ footer hr {
 }
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
+
+    .row{
+        justify-content: center;
+        align-items: center;
+    }
 
     .header-logo img{
         margin-top: 5px;
