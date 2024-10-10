@@ -67,6 +67,9 @@ header {
     justify-content: space-between;
 }
 
+
+/* CABEÇALHO */
+
 .header-logo{
     margin-right: 40px;
     margin-left: 40px;
@@ -202,6 +205,9 @@ header {
     width: 40px;
 }
 
+/* PÁGINA PRINCIPAL */
+
+/* Banner */
 .banner {
     display: flex;
     flex-direction: row;
@@ -242,6 +248,8 @@ header {
 .btn:hover {
     background-color: #5D3F3D;
 }
+
+/* Benefícios */
 
 .beneficios {
     background-color: #5D3F3D;
@@ -298,6 +306,8 @@ header {
     text-decoration: underline;
     font-size: 10px;
 }
+
+/* Vitrine Destaques */
 
 .vitrine-destaque {
     margin-bottom: 10px;
@@ -367,7 +377,7 @@ header {
     flex-direction: column;
 }
 
-.type p {
+.type  p, .nome-produto {
     color: #020815;
     margin: 5px 0;
     font-weight: 700;
@@ -375,7 +385,7 @@ header {
     padding-right: 8px;
 }
 
-.type span {
+.type span, .detalhes, .rate {
     color: #000;
 }
 
@@ -454,6 +464,8 @@ span.swiper-pagination-bullet {
     color: #5D3F3D;
 }
 
+/* Marcas em destaque */
+
 .marcas-destaque {
     display: flex;
     flex-direction: column;
@@ -510,6 +522,8 @@ span.swiper-pagination-bullet {
     width: 95%;
 }
 
+/* Vitrine Prinipal */
+
 .vitrine-principal{
     display: flex;
     flex-direction: column;
@@ -550,6 +564,8 @@ span.swiper-pagination-bullet {
 .img-produto img{
     max-height: 200px;
 }
+
+/* Produtos em destaque */
 
 .produtos-destaque {
     display: flex;
@@ -632,6 +648,8 @@ span.swiper-pagination-bullet {
     background-color: #5D3F3D;
 }
 
+/* Rodapé */
+
 footer {
     background-color: #000;
     display: flex;
@@ -698,6 +716,184 @@ footer hr {
     justify-content: center;
     margin: 20px 0;
 }
+
+/* Página de Compra */
+
+/* .nav-compras{
+    display: flex;
+    justify-content: center;
+}
+
+.formas-pag{
+    position:absolute;
+    background-color: #a2a2a2;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    margin-top: 250px;
+}
+
+.formas-pag > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formas-pag > div > img{
+    height: 30px;
+} */
+
+.container-compra{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoCompra{
+    display: flex;
+    flex-direction: row;
+    max-width: 1250px;
+    margin: 40px 0 3000px 0;
+    background-color: rgb(237, 237, 237);
+    border-radius: 20px;
+    gap: 30px;
+}
+
+.images{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.image-preview{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.image-preview img{
+    width: 50px;
+    border: solid 1px #000;
+    border-radius: 6px;
+}
+
+.detalhe-produto{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    width: 500px;
+}
+
+.nome-prod{
+    font-size: 2em;
+}
+
+/* .rate{
+    font-size: 1.5em;
+} */
+
+.detalhes-produto > .detalhes{
+    font-size: 17px;
+}
+
+.detalhes-compra{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 30px;
+    gap: 20px;
+}
+
+.detalhes-valor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.377);
+}
+
+.valor{
+    font-size: 2em;
+}
+
+.parcelas{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.parcelas img{
+    width: 20px;
+}
+
+.detalhes-valor a{
+    color: #636363;
+    text-decoration: underline;
+}
+
+.frete{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    border: solid 1px #00000042;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.377);
+}
+
+.calculadora {
+    display: flex;
+    gap: 10px;
+}
+
+.calculadora input{
+    height: 40px;
+    width: 85%;
+    border-radius: 5px;
+    padding: 5px;
+}
+.calculadora button{
+    height: 40px;
+    width: 60px;
+    border-radius: 5px;
+    background-color: #5D3F3D;
+    color: white;
+    padding: 5px;
+}
+
+.calculadora button:hover{
+    color: #fff;
+    background-color: #da1e11;
+    transition: all ease 0.3s;
+}
+
+.btnAddCarrinho{
+    width: 100%;
+    background-color: #5D3F3D;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    height: 40px;
+}
+
+.btnAddCarrinho:hover{
+    color: #fff;
+    background-color: #da1e11;
+    transition: all ease 0.3s;
+}
+
+.aviso{
+    font-size: 12px;
+    width: 60%;
+}
+
+/* Responsividade */
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
 

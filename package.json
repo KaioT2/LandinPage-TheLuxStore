@@ -1,0 +1,19 @@
+{
+  "name": "moda-e-roupas",
+  "version": "1.0.0",
+  "description": "![The-Lux-Store](https://github.com/KaioT2/The-Lux-Store/assets/98715856/2f8b300b-1b85-4c76-a221-122f9016255a)",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaio Dias",
+  "license": "ISC",
+  "dependencies": {
+    "correios-brasil": "^3.0.6",
+    "express": "^4.21.0",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.4"
+  }
+}

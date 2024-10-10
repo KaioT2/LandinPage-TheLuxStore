@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <meta name="author" content="Kaio Dias">
+
+    <link rel="icon" href="../images/logo.png" type="image/x-icon" style="border-radius: 50%;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <header>
+
+        <nav class="menu">
+            <nav>
+                <div class="menu-btn" id="menu-btn">
+                    <img src="../images/menuIcon.png" alt="menu" class="icone">
+                </div>
+
+                <nav class="mobile-menu" id="mobile-menu">
+                    <div class="btn-fechar" id="btn-fechar">
+                        <img src="../images/x.png" alt="menu" class="icone">
+                    </div>
+
+                    <ul>
+                        <a href="#">
+                            <li class="mobile-menu-item">Moda masculina</li>
+                        </a>
+                        <a href="#">
+                            <li class="mobile-menu-item">Moda feminina</li>
+                        </a>
+                        <a href="#">
+                            <li class="mobile-menu-item">Acessórios</li>
+                        </a>
+                        <a href="#">
+                            <li class="mobile-menu-item">Calçados</li>
+                        </a>
+                    </ul>
+                </nav>
+            </nav>
+
+            <div class="header-logo">
+                <a href="../index.html"><img src="../images/logo.png" alt="logo" class="logo-image"></a>
+            </div>
+
+            <nav>
+                <nav class="menu-desktop">
+                    <ul>
+                        <li>
+                            <div class="dropdown">
+                                <span class="dropbtn">Moda masculina</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Calça</a>
+                                    <a href="#">Calça jeans</a>
+                                    <a href="#">Camisa</a>
+                                    <a href="#">Camiseta</a>
+                                    <a href="#">Camiseta básica</a>
+                                    <a href="#">Camiseta estampada</a>
+                                    <a href="#">Suéter</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <span class="dropbtn">Moda feminina</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Blazer</a>
+                                    <a href="#">Blusa</a>
+                                    <a href="#">Body</a>
+                                    <a href="#">Calça</a>
+                                    <a href="#">Calça jeans</a>
+                                    <a href="#">Camisa</a>
+                                    <a href="#">Vestido</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <span class="dropbtn">Calçados</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Bota</a>
+                                    <a href="#">Chinelo e sandália</a>
+                                    <a href="#">Sapato</a>
+                                    <a href="#">Tênis casual</a>
+                                    <a href="#">Tênis esportivo</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <span class="dropbtn">Acessórios</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Anéis</a>
+                                    <a href="#">Relógios</a>
+                                    <a href="#">Bolsas</a>
+                                    <a href="#">Bonés e chapéus</a>
+                                    <a href="#">Pulseira e bracelete</a>
+                                    <a href="#">Carteiras</a>
+                                    <a href="#">Cintos</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </nav>
+        </nav>
+
+        <nav class="user-buttons">
+            <div class="carrinho-btn" id="carrinho-btn">
+                <a href="#"><img src="../images/carrinho-de-compras.png" alt="menu" class="icone"></a>
+            </div>
+        </nav>
+
+    </header>
+
+    <main>
+        <nav class="nav-compras">
+            <!-- <div class="formas-pag">
+                <div>
+                    <img src="../images/pix.png"class="pix">
+                    <h3>No pix com 5% de desconto</h3>
+                </div>
+                <div>
+                    <img src="../images/cartao.png"class="cartao">
+                    <h3>No cartão em até 10x sem juros</h3>
+                </div>
+            </div> -->
+            <div class="container-compra">
+                <div class="infoCompra">
+                    <div class="images">
+                        <div class="image-principal">
+                            <img src="" alt="" class="img-principal">
+                        </div>
+                        <div class="image-preview">
+                            <img src="" alt=""class="img-preview">
+                        </div>
+                    </div>
+                    <div class="detalhe-produto">
+                        <h2 class="nome-prod"></h2>
+                        <span class="rate"></span>
+                        <span class="detalhes"></span>
+                    </div>
+                    <div class="detalhes-compra">
+                        <div class="detalhes-valor">
+                            <h2 class="valor"></h2>
+                            <div class="parcelas">
+                                <img src="../images/cartao.png">
+                                <span>até 10x sem juros</span>
+                            </div>
+                            <a href="#" class="ver-mais">mais formas de pagamento</a>
+                        </div>
+                        <div class="frete">
+                            <span>Calcular frete e prazo</span>
+                            <div class="calculadora">
+                                <input type="text" id="cep" placeholder="00000-000">
+                                <button type="button" class="btnFrete">Calcular</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btnAddCarrinho">Adicionar ao carrinho</button>
+                        <span class="aviso">Este produto conta com a garantia The Lux Style, que assegura sua compra, do pedido à entrega.</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </main>
+
+    <footer>
+        <div class="footer-principal">
+            <div class="filiais">
+                <h2>Encontre nossas lojas</h2>
+
+                <div class="locais">
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>Florida</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>California</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>Texas</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social">
+                <a href="#"><img src="../images/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="../images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../images/facebook.png" alt="Facebook"></a>
+
+                <h2>#TheLuxStyle</h2>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="copy">
+            <p>© Kaio Dias - 2023</p>
+        </div>
+    </footer>
+</body>
+<script src="../js/script.js"></script>
+<script src="../Produto/manipula_interface_produto.mjs" type="module"></script>
+
+</html>
