@@ -1,5 +1,39 @@
 import { altera, buscaUm, exclui, getLista, novo } from "./acessa_dados_produto.mjs";
 
+
+async function consultarCEP(cep) {
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (!response.ok) throw new Error("CEP não encontrado.");
+        const dados = await response.json();
+
+        if (dados.erro) throw new Error("CEP inválido.");
+        return dados; // Retorna os dados do CEP
+    } catch (error) {
+        console.error("Erro ao consultar CEP:", error);
+        alert("CEP inválido ou não encontrado.");
+    }
+}
+
+// Função para calcular o frete (mock simples - você pode integrar lógica real dos Correios)
+function calcularFrete(cep) {
+    // Exemplo: Taxa fixa + distância fictícia baseada nos primeiros dois dígitos do CEP
+    const taxaFixa = 10;
+    const distancia = parseInt(cep.substring(0, 2)) * 0.5; 
+    const valorFrete = taxaFixa + distancia;
+    return valorFrete.toFixed(2);
+}
+
+function exibirFrete(endereco, frete) {
+    const resultadoFrete = document.querySelector(".resultado-frete");
+    resultadoFrete.innerHTML = `
+        <p><strong>Endereço:</strong> ${endereco.localidade} - ${endereco.uf}</p>
+        <p><strong>Frete:</strong> R$ ${frete}</p>
+    `;
+
+    console.log(endereco);
+}
+
 async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal'); 
     const dados = await getLista();
@@ -248,6 +282,17 @@ async function preencheTelaProd(id) {
     }
 
     console.log(produto);  
+
+    // Adicionar evento de cálculo de frete
+    const btnCalcularFrete = document.querySelector("#calcularFrete");
+    btnCalcularFrete.addEventListener("click", async () => {
+        const cepInput = document.querySelector("#cep").value;
+        if (cepInput) {
+            const endereco = await consultarCEP(cepInput);
+            const frete = calcularFrete(cepInput);
+            exibirFrete(endereco, frete);
+        }
+    });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
