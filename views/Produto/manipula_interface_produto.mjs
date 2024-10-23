@@ -15,9 +15,7 @@ async function consultarCEP(cep) {
     }
 }
 
-// Função para calcular o frete (mock simples - você pode integrar lógica real dos Correios)
 function calcularFrete(cep) {
-    // Exemplo: Taxa fixa + distância fictícia baseada nos primeiros dois dígitos do CEP
     const taxaFixa = 10;
     const distancia = parseInt(cep.substring(0, 2)) * 0.5; 
     const valorFrete = taxaFixa + distancia;
@@ -31,7 +29,7 @@ function exibirFrete(endereco, frete) {
         <p><strong>Frete:</strong> R$ ${frete}</p>
     `;
 
-    console.log(endereco);
+    //console.log(endereco);
 }
 
 async function inserirProdPrincipal() {
@@ -116,13 +114,11 @@ async function inserirProdPrincipal() {
             type.appendChild(rate);
             detalhesProduto.appendChild(preco);
 
-            // Adicionando o evento de clique para redirecionar e passar o ID do produto
             a.addEventListener('click', function (event) {
                 event.preventDefault();
                 const productId = this.getAttribute('data-id');
                 preencheTelaProd(productId);
 
-                // Redireciona para a página do produto com o ID como parâmetro
                 window.location.href = `/Produto/paginaProduto.html?id=${productId}`;
             });
         }
@@ -222,13 +218,11 @@ async function inserirProdDestaque() {
 
             btnComprar.innerText = "Comprar agora";
 
-            // Evento de clique que redireciona para a página do produto
             box.addEventListener('click', function (event) {
                 event.preventDefault();
                 const productId = this.getAttribute('data-id');
                 preencheTelaProd(productId);
 
-                // Redireciona para a página do produto com o ID
                 window.location.href = `/Produto/paginaProduto.html?id=${productId}`;
             });
         }
@@ -283,7 +277,6 @@ async function preencheTelaProd(id) {
 
     console.log(produto);  
 
-    // Adicionar evento de cálculo de frete
     const btnCalcularFrete = document.querySelector("#calcularFrete");
     btnCalcularFrete.addEventListener("click", async () => {
         const cepInput = document.querySelector("#cep").value;
