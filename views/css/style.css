@@ -741,6 +741,15 @@ footer hr {
     margin-bottom: 30px;
 }
 
+.image-principal{
+    padding: 10px;
+}
+
+.img-principal{
+    max-width: 400px;
+    max-height: 400px;
+}
+
 .image-preview{
     display: flex;
     justify-content: center;
@@ -842,6 +851,10 @@ footer hr {
     color: #fff;
     background-color: #da1e11;
     transition: all ease 0.3s;
+}
+
+.resultado-frete{
+    margin-top: 15px;
 }
 
 .btnAddCarrinho{
