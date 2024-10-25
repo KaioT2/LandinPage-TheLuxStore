@@ -201,6 +201,8 @@ async function inserirProdDestaque() {
 async function preencheTelaProd(id) {
     const produto = await buscaUm(id);  
 
+    document.title = "Comprar " + produto.nome;
+
     const imgPrincipal = document.getElementsByClassName("img-principal");
     if (imgPrincipal.length > 0) {
         imgPrincipal[0].setAttribute("src", produto.image_url);
@@ -244,8 +246,6 @@ async function preencheTelaProd(id) {
         valor[0].innerText = `\$${produto.preco}`;
     }
 
-    console.log(produto);  
-
     const btnCalcularFrete = document.querySelector("#calcularFrete");
     btnCalcularFrete.addEventListener("click", async () => {
         const cepInput = document.querySelector("#cep").value;
@@ -255,7 +255,152 @@ async function preencheTelaProd(id) {
             exibirFrete(endereco, frete);
         }
     });
+
+    const btnAddCarrinho = document.querySelector(".btnAddCarrinho");
+    btnAddCarrinho.addEventListener("click", function (event) {
+        event.preventDefault();
+    
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+
+        window.location.href = `/Produto/paginaCarrinho.html?id=${productId}`;
+    });
 }
+
+async function inserirProdCarrinho(id) {
+    const produto = await buscaUm(id);
+    const listaProd = document.querySelector('#listaProd');
+
+    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+
+    if (!carrinho.some(item => item.id === produto.id)) {
+        carrinho.push(produto);
+        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));  // Atualiza o sessionStorage
+    }
+
+    const itemProduto = document.createElement("li");
+    itemProduto.className = "produto";
+
+    const imgProduto = document.createElement("img");
+    imgProduto.src = produto.image_url;
+
+    const detalheProd = document.createElement("div");
+    detalheProd.className = "detalhe-prod";
+
+    const nomeProd = document.createElement("h2");
+    nomeProd.className = "nomeProd";
+    nomeProd.innerText = produto.nome;
+
+    const detalhes = document.createElement("span");
+    detalhes.className = "detalhes";
+    detalhes.innerText = produto.descricao;
+
+    const quantidades = document.createElement("div");
+    quantidades.className = "quantidades";
+
+    const quantidade = document.createElement("span");
+    quantidade.innerText = "Quantidade";
+
+    const qtd = document.createElement("select");
+    qtd.id = `qtd-${produto.id}`;
+    qtd.className = "qtd";
+
+    const subtotal = document.createElement("div");
+    subtotal.className = "subtotal";
+
+    const preco = document.createElement("h2");
+    preco.className = "preco";
+    preco.innerText = `R$ ${produto.preco}`;
+
+    const parcelas = document.createElement("div");
+    parcelas.className = "parcelas";
+
+    const imgCartao = document.createElement("img");
+    imgCartao.src = "../images/cartao.png";
+
+    const qtdParcelas = document.createElement("span");
+    qtdParcelas.innerText = "até 10x sem juros";
+
+    const btnRemove = document.createElement("button");
+    btnRemove.className = "remove";
+
+    const imgLixo = document.createElement("img");
+    imgLixo.src = "../images/lixeira.png";
+    btnRemove.appendChild(imgLixo);
+
+    btnRemove.addEventListener("click", () => {
+        itemProduto.remove();
+        carrinho = carrinho.filter(item => item.id !== produto.id);
+        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+        atualizaTotalCarrinho();  // Atualiza o total ao remover produto
+    });
+
+    listaProd.appendChild(itemProduto);
+    itemProduto.appendChild(imgProduto);
+    itemProduto.appendChild(detalheProd);
+    detalheProd.appendChild(nomeProd);
+    detalheProd.appendChild(detalhes);
+
+    itemProduto.appendChild(quantidades);
+    quantidades.appendChild(quantidade);
+    quantidades.appendChild(qtd);
+
+    for (let i = 1; i <= produto.quantidade; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.innerText = i;
+        qtd.appendChild(option);
+    }
+
+    itemProduto.appendChild(subtotal);
+    subtotal.appendChild(preco);
+    subtotal.appendChild(parcelas);
+    parcelas.appendChild(imgCartao);
+    parcelas.appendChild(qtdParcelas);
+    itemProduto.appendChild(btnRemove);
+
+    const btnCalcularFrete = document.querySelector("#calcularFrete");
+    btnCalcularFrete.addEventListener("click", async () => {
+        const cepInput = document.querySelector("#cep").value;
+        if (cepInput) {
+            const endereco = await consultarCEP(cepInput);
+            const frete = calcularFrete(cepInput);
+            exibirFrete(endereco, frete);
+            atualizaTotalCarrinho();
+        }
+        
+    });
+
+    qtd.addEventListener("change", atualizaTotalCarrinho);
+
+    atualizaTotalCarrinho(); 
+}
+
+async function atualizaTotalCarrinho() {
+    const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    let calculado = 0.0;
+
+    carrinho.forEach(produto => {
+        const quantidadeElement = document.getElementById(`qtd-${produto.id}`);
+        const quantidade = quantidadeElement ? parseInt(quantidadeElement.value) : 1;
+        calculado += produto.preco * quantidade;
+    });
+
+    const valorFreteElement = document.querySelector('.valorFrete');
+    if (document.querySelector('.valorFrete')) {
+        let totFrete = valorFreteElement.innerText.replace("R$", "").replace("Frete: ", "");
+
+        let frete =  parseFloat(totFrete);
+
+        calculado += frete;
+    }
+
+    const totalElement = document.querySelector(".total");
+    if (totalElement) {
+        totalElement.innerText = `Total: R$ ${calculado.toFixed(2)}`;
+    }
+}
+
 
 window.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname;
@@ -269,5 +414,14 @@ window.addEventListener('DOMContentLoaded', () => {
         if (productId) {
             preencheTelaProd(productId);
         }
-    } 
+    } else if (currentPage === "/Produto/paginaCarrinho.html") {
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        if (productId) {
+            inserirProdCarrinho(productId);
+        }
+
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+        carrinho.forEach(produto => inserirProdCarrinho(produto.id));
+    }
 });

@@ -7,6 +7,7 @@ const Produto = conexao.define('Produto', {
     preco: DataTypes.DECIMAL,
     rate: DataTypes.INTEGER,
     image_url: DataTypes.STRING,
+    quantidade: DataTypes.INTEGER
 });
 
 Produto.sync();

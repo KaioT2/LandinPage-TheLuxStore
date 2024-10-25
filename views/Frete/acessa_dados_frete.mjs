@@ -23,10 +23,8 @@ function exibirFrete(endereco, frete) {
     const resultadoFrete = document.querySelector(".resultado-frete");
     resultadoFrete.innerHTML = `
         <p><strong>Endereço:</strong> ${endereco.localidade} - ${endereco.uf}</p>
-        <p><strong>Frete:</strong> R$ ${frete}</p>
+        <p class="valorFrete"><strong>Frete:</strong> R$ ${frete}</p>
     `;
-
-    //console.log(endereco);
 }
 
 export {consultarCEP, calcularFrete, exibirFrete};

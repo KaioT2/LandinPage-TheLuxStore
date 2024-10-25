@@ -657,6 +657,7 @@ footer {
     color: #fff;
     font-family: 'Old Standard TT', sans-serif;
     min-height: 200px;
+    position: sticky;
 }
 
 footer hr {
@@ -728,8 +729,8 @@ footer hr {
 .infoCompra{
     display: flex;
     flex-direction: row;
-    max-width: 1250px;
-    margin: 40px 0 3000px 0;
+    max-width: 98%;
+    margin: 10px 0 10px 0;
     background-color: rgb(237, 237, 237);
     border-radius: 20px;
     gap: 30px;
@@ -817,10 +818,8 @@ footer hr {
 }
 
 .frete{
-    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: left;
     border: solid 1px #00000042;
     padding: 10px;
     border-radius: 10px;
@@ -874,7 +873,89 @@ footer hr {
 
 .aviso{
     font-size: 12px;
-    width: 60%;
+    width: 90%;
+}
+
+/* CARRINHO DE COMPRAS */
+.nav-compras{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5000px;
+}
+
+.nav-compras > h2 {
+    margin: 20px;
+}
+
+.linha {
+    border-color: #CCCCCC;
+    border-width: 0px;
+    width: 90%;
+    border-bottom-width: 1px;
+    border-style: solid;
+}
+
+.container-carrinho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 10px 40px 10px 40px;
+    padding: 15px;
+    /* border: solid 1px black; */
+    gap: 30px;
+}
+
+.produto{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+}
+
+.produto > img {
+    width: 90px;
+    height: 90px;
+}
+
+.detalhe-prod{
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    width: 350px;
+}
+
+.nomeProd{
+    font-size: 1.5em;
+}
+
+.quantidades{
+    display: flex;
+    flex-direction: column;
+}
+
+.preco{
+    font-size: 1.3em;
+}
+
+.qtd{
+    border: solid 2px black;
+    border-radius: 10%;
+    height: 40px;
+    padding: 5%;
+}
+
+.remove{
+    background-color: white;
+    cursor: pointer;
+}
+
+.dadosPedido{
+    width: 70%;
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    gap: 40%;
 }
 
 /* Responsividade */
@@ -1028,6 +1109,112 @@ footer hr {
     .locais-item div>span {
         margin-top: 5px;
     }
+
+    /* PÁGINA DE COMPRA */
+    
+    .infoCompra{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        max-width: 680px;
+        gap: 15px;
+    }
+    
+    .images{
+        margin-bottom: 15px;
+    }
+    
+    .image-principal{
+        padding: 10px;
+    }
+    
+    .img-principal{
+        max-width: 300px;
+        max-height: 300px;
+    }
+    
+    .image-preview{
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .image-preview img{
+        width: 50px;
+        border: solid 1px #000;
+        border-radius: 6px;
+    }
+    
+    .detalhe-produto{
+        justify-content: left;
+        align-items: center;
+        margin: 30px;
+        width: 500px;
+    }
+    
+    .nome-prod{
+        font-size: 2em;
+    }
+    
+    .detalhes-produto > .detalhes{
+        font-size: 17px;
+    }
+    
+    .detalhes-compra{
+        width: 400px;
+        align-items: left;
+        margin-top: 0px;
+    }
+    
+    .valor{
+        font-size: 1.7em;
+    }
+    
+    .calculadora input{
+        height: 40px;
+        width: 85%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .calculadora button{
+        height: 40px;
+        width: 60px;
+        border-radius: 5px;
+        background-color: #5D3F3D;
+        color: white;
+        padding: 5px;
+    }
+    
+    .calculadora button:hover{
+        color: #fff;
+        background-color: #da1e11;
+        transition: all ease 0.3s;
+    }
+    
+    .resultado-frete{
+        margin-top: 15px;
+    }
+    
+    .btnAddCarrinho{
+        width: 100%;
+        background-color: #5D3F3D;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        height: 40px;
+    }
+    
+    .btnAddCarrinho:hover{
+        color: #fff;
+        background-color: #da1e11;
+        transition: all ease 0.3s;
+    }
+    
+    .aviso{
+        font-size: 12px;
+        width: 90%;
+    }
 }
 
 @media screen and (min-width: 700px) and (max-width: 1000px) {
@@ -1158,5 +1345,74 @@ footer hr {
 
     .locais-item div>span {
         margin-top: 5px;
+    }
+
+    /* PÁGINA DE COMPRA */
+    
+    .infoCompra{
+        max-width: 800px;
+        margin-top: 0px;
+        margin-bottom: 500px;
+        gap: 15px;
+    }
+    
+    .image-principal{
+        padding: 10px;
+    }
+    
+    .img-principal{
+        max-width: 200px;
+    }
+    
+    .detalhe-produto{
+        display: flex;
+        flex-direction: column;
+        margin: 15px;
+        width: 450px;
+    }
+    
+    .nome-prod{
+        font-size: 1.7em;
+    }
+    
+    .detalhes-produto > .detalhes{
+        font-size: 17px;
+    }
+    
+    .detalhes-compra{
+        width: 450px;
+        margin: 15px 30px 15px 15px;
+        gap: 20px;
+    }
+    
+    .valor{
+        font-size: 1.7em;
+    }
+    
+    .frete{
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.377);
+    }
+    
+    .calculadora {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .calculadora input{
+        height: 35px;
+        width: 85%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    .calculadora button{
+        height: 35px;
+        width: 55px;
+    }
+    
+    .resultado-frete{
+        margin-top: 10px;
     }
 }

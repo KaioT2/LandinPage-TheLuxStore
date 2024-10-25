@@ -7,6 +7,7 @@ async function novo(req, res){
         preco: req.body.preco,
         rate: req.body.rate,
         image_url: req.body.image_url,
+        quantidade: req.body.quantidade,
     });
     res.json(criado);
 }
@@ -32,6 +33,7 @@ async function altera (req, res){
     prod.preco = req.body.preco;
     prod.rate = req.body.rate;
     prod.image_url= req.body.image_url;
+    prod.quantidade= req.body.quantidade;
 
     await prod.save();
     res.json(prod);
@@ -46,6 +48,7 @@ async function exclui (req, res){
     prod.preco = req.body.preco;
     prod.rate = req.body.rate;
     prod.image_url= req.body.image_url;
+    prod.quantidade= req.body.quantidade;
 
     await prod.destroy();
     res.json(prod);
