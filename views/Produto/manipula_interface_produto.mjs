@@ -262,9 +262,15 @@ async function preencheTelaProd(id) {
     
         const params = new URLSearchParams(window.location.search);
         const productId = params.get('id');
-
-        window.location.href = `/Produto/paginaCarrinho.html?id=${productId}`;
+    
+        inserirProdCarrinho(productId);
+    
+        const newURL = window.location.pathname;
+        history.replaceState(null, "", newURL);
+    
+        window.location.href = "/Produto/paginaCarrinho.html";
     });
+
 }
 
 async function inserirProdCarrinho(id) {
