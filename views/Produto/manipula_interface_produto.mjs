@@ -1,8 +1,8 @@
 import { altera, buscaUm, exclui, getLista, novo } from "./acessa_dados_produto.mjs";
-import {consultarCEP, calcularFrete, exibirFrete} from "../Frete/acessa_dados_frete.mjs"
+import { consultarCEP, calcularFrete, exibirFrete } from "../Frete/acessa_dados_frete.mjs"
 
 async function inserirProdPrincipal() {
-    const boxcontainers = document.querySelectorAll('.vitrinePrincipal'); 
+    const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
     const dados = await getLista();
 
     boxcontainers.forEach(function (boxcont) {
@@ -42,7 +42,7 @@ async function inserirProdPrincipal() {
             detalhes.classList.add('detalhes');
 
             const rate = document.createElement('span');
-            rate.classList.add('rate'); 
+            rate.classList.add('rate');
 
             const preco = document.createElement('span');
             preco.classList.add('preco');
@@ -88,14 +88,15 @@ async function inserirProdPrincipal() {
                 const productId = this.getAttribute('data-id');
                 preencheTelaProd(productId);
 
-                window.location.href = `/Produto/paginaProduto.html?id=${productId}`;
+                window.location.href = `${window.location.origin}/Produto/paginaProduto.html?id=${productId}`;
+
             });
         }
     });
 }
 
 async function inserirProdDestaque() {
-    const boxcontainers = document.querySelectorAll('.vitrineDestaque'); 
+    const boxcontainers = document.querySelectorAll('.vitrineDestaque');
     const dados = await getLista();
 
     boxcontainers.forEach(function (boxcont) {
@@ -142,7 +143,7 @@ async function inserirProdDestaque() {
             detalhes.classList.add('detalhes');
 
             const rate = document.createElement('span');
-            rate.classList.add('rate'); 
+            rate.classList.add('rate');
 
             const preco = document.createElement('span');
             preco.classList.add('preco');
@@ -192,14 +193,15 @@ async function inserirProdDestaque() {
                 const productId = this.getAttribute('data-id');
                 preencheTelaProd(productId);
 
-                window.location.href = `/Produto/paginaProduto.html?id=${productId}`;
+                window.location.href = `${window.location.origin}/Produto/paginaProduto.html?id=${productId}`;
+
             });
         }
     });
 }
 
 async function preencheTelaProd(id) {
-    const produto = await buscaUm(id);  
+    const produto = await buscaUm(id);
 
     document.title = "Comprar " + produto.nome;
 
@@ -222,17 +224,17 @@ async function preencheTelaProd(id) {
     if (rate.length > 0) {
 
 
-            let aux = "";
-            let cont, cont2;
-            for (cont = 0; cont < produto.rate; cont++) {
-                aux += "&#9733;";
-            }
-            for (cont2 = cont; cont2 < 5; cont2++) {
-                aux += "&#9734;";
-            }
+        let aux = "";
+        let cont, cont2;
+        for (cont = 0; cont < produto.rate; cont++) {
+            aux += "&#9733;";
+        }
+        for (cont2 = cont; cont2 < 5; cont2++) {
+            aux += "&#9734;";
+        }
 
 
-        rate[0].innerHTML = aux +" "+ produto.rate; 
+        rate[0].innerHTML = aux + " " + produto.rate;
     }
 
     const detalhes = document.getElementsByClassName("detalhes");
@@ -257,18 +259,21 @@ async function preencheTelaProd(id) {
     });
 
     const btnAddCarrinho = document.querySelector(".btnAddCarrinho");
-    btnAddCarrinho.addEventListener("click", function (event) {
+    const notificacao = document.getElementById("notificacao");
+
+    btnAddCarrinho.addEventListener("click", (event) => {
         event.preventDefault();
-    
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get('id');
-    
+        const productId = new URLSearchParams(window.location.search).get('id');
+
         inserirProdCarrinho(productId);
-    
-        const newURL = window.location.pathname;
-        history.replaceState(null, "", newURL);
-    
-        window.location.href = "/Produto/paginaCarrinho.html";
+
+        notificacao.classList.remove('oculto');
+        notificacao.classList.add('visivel');
+
+        setTimeout(() => {
+            notificacao.classList.remove('visivel');
+            notificacao.classList.add('oculto');
+        }, 3000);
     });
 
 }
@@ -277,11 +282,10 @@ async function inserirProdCarrinho(id) {
     const produto = await buscaUm(id);
     const listaProd = document.querySelector('#listaProd');
 
-    let carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
-
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     if (!carrinho.some(item => item.id === produto.id)) {
         carrinho.push(produto);
-        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));  // Atualiza o sessionStorage
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
     }
 
     const itemProduto = document.createElement("li");
@@ -334,11 +338,16 @@ async function inserirProdCarrinho(id) {
     imgLixo.src = "../images/lixeira.png";
     btnRemove.appendChild(imgLixo);
 
+    function renderizarCarrinho() {
+        listaProd.innerHTML = "";
+        carrinho.forEach(produto => inserirProdCarrinho(produto.id));
+    }
+
     btnRemove.addEventListener("click", () => {
-        itemProduto.remove();
-        carrinho = carrinho.filter(item => item.id !== produto.id);
-        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
-        atualizaTotalCarrinho();  // Atualiza o total ao remover produto
+        carrinho = carrinho.filter(item => String(item.id) !== String(produto.id));
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        renderizarCarrinho();
+        atualizaTotalCarrinho();
     });
 
     listaProd.appendChild(itemProduto);
@@ -367,23 +376,30 @@ async function inserirProdCarrinho(id) {
 
     const btnCalcularFrete = document.querySelector("#calcularFrete");
     btnCalcularFrete.addEventListener("click", async () => {
-        const cepInput = document.querySelector("#cep").value;
+        const cepInput = document.querySelector("#cep").value.trim();
         if (cepInput) {
             const endereco = await consultarCEP(cepInput);
-            const frete = calcularFrete(cepInput);
+            const frete = await calcularFrete(cepInput);
             exibirFrete(endereco, frete);
             atualizaTotalCarrinho();
+        } else {
+            alert("Por favor, insira um CEP válido.");
         }
-        
     });
 
-    qtd.addEventListener("change", atualizaTotalCarrinho);
+    qtd.addEventListener("change", () => {
+        atualizaTotalCarrinho();
 
-    atualizaTotalCarrinho(); 
+        const subtotal = document.querySelector(".preco");
+        subtotal.innerText = `R$ ${produto.preco * qtd.value}`;
+    })
+
+    atualizaTotalCarrinho();
 }
 
+
 async function atualizaTotalCarrinho() {
-    const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     let calculado = 0.0;
 
     carrinho.forEach(produto => {
@@ -395,9 +411,7 @@ async function atualizaTotalCarrinho() {
     const valorFreteElement = document.querySelector('.valorFrete');
     if (document.querySelector('.valorFrete')) {
         let totFrete = valorFreteElement.innerText.replace("R$", "").replace("Frete: ", "");
-
-        let frete =  parseFloat(totFrete);
-
+        let frete = parseFloat(totFrete);
         calculado += frete;
     }
 
@@ -407,27 +421,26 @@ async function atualizaTotalCarrinho() {
     }
 }
 
+function carregarCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    carrinho.forEach(produto => inserirProdCarrinho(produto.id));
+    atualizaTotalCarrinho();
+}
 
 window.addEventListener('DOMContentLoaded', () => {
-    const currentPage = window.location.pathname;
+    const path = window.location.pathname;
 
-    if (currentPage === "/index.html") {
-        inserirProdPrincipal();
-        inserirProdDestaque();
-    } else if (currentPage === "/Produto/paginaProduto.html") {
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get('id');
-        if (productId) {
-            preencheTelaProd(productId);
-        }
-    } else if (currentPage === "/Produto/paginaCarrinho.html") {
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get('id');
-        if (productId) {
-            inserirProdCarrinho(productId);
-        }
-
-        const carrinho = JSON.parse(sessionStorage.getItem('carrinho')) || [];
-        carrinho.forEach(produto => inserirProdCarrinho(produto.id));
+    switch (path) {
+        case "/index.html":
+            inserirProdPrincipal();
+            inserirProdDestaque();
+            break;
+        case "/Produto/paginaProduto.html":
+            const productId = new URLSearchParams(window.location.search).get('id');
+            if (productId) preencheTelaProd(productId);
+            break;
+        case "/Produto/paginaCarrinho.html":
+            carregarCarrinho();
+            break;
     }
 });
