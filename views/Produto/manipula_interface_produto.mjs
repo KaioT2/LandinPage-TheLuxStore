@@ -278,6 +278,28 @@ async function preencheTelaProd(id) {
 
 }
 
+function contarProdutosCarrinho() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const quantidadeTotal = carrinho.reduce((total, produto) => total + produto.quantidadeSelecionada, 0);
+    return quantidadeTotal;
+}
+
+function carrinhoVazio(){
+    if(contarProdutosCarrinho()==0){
+        const vazio = document.querySelector(".vazio");
+    
+        vazio.innerHTML = '<h2>Seu carrinho está vazio!</h2><span>Você ainda não possui itens no seu carrinho.</span><button type="button" class="btnVazio">Ver produtos</button>';
+
+        if (document.querySelector(".btnVazio")) {
+            const btnVazio = document.querySelector(".btnVazio");
+            btnVazio.addEventListener("click", (event) => {
+                event.preventDefault();
+                window.location.href = `/index.html`;
+            });
+        }
+    }
+}
+
 async function inserirProdCarrinho(id) {
     const produto = await buscaUm(id);
     const listaProd = document.querySelector('#listaProd');
@@ -286,7 +308,7 @@ async function inserirProdCarrinho(id) {
 
     const produtoExistente = carrinho.find(item => item.id === produto.id);
     if (!produtoExistente) {
-        produto.quantidadeSelecionada = 1; // Define a quantidade inicial como 1
+        produto.quantidadeSelecionada = 1;
         carrinho.push(produto);
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
     } else {
@@ -320,7 +342,6 @@ async function inserirProdCarrinho(id) {
     qtd.id = `qtd-${produto.id}`;
     qtd.className = "qtd";
 
-    // Bloco de código que adiciona as opções ao <select>, agora apenas uma vez
     for (let i = 1; i <= produto.quantidade; i++) {
         const option = document.createElement('option');
         option.value = i;
@@ -362,6 +383,7 @@ async function inserirProdCarrinho(id) {
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
         renderizarCarrinho();
         atualizaTotalCarrinho();
+        carrinhoVazio();
     });
 
     listaProd.appendChild(itemProduto);
@@ -436,6 +458,7 @@ function carregarCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.forEach(produto => inserirProdCarrinho(produto.id));
     atualizaTotalCarrinho();
+    carrinhoVazio();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
