@@ -283,9 +283,14 @@ async function inserirProdCarrinho(id) {
     const listaProd = document.querySelector('#listaProd');
 
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    if (!carrinho.some(item => item.id === produto.id)) {
+
+    const produtoExistente = carrinho.find(item => item.id === produto.id);
+    if (!produtoExistente) {
+        produto.quantidadeSelecionada = 1; // Define a quantidade inicial como 1
         carrinho.push(produto);
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    } else {
+        produto.quantidadeSelecionada = produtoExistente.quantidadeSelecionada;
     }
 
     const itemProduto = document.createElement("li");
@@ -315,12 +320,21 @@ async function inserirProdCarrinho(id) {
     qtd.id = `qtd-${produto.id}`;
     qtd.className = "qtd";
 
+    // Bloco de código que adiciona as opções ao <select>, agora apenas uma vez
+    for (let i = 1; i <= produto.quantidade; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.innerText = i;
+        if (i === produto.quantidadeSelecionada) option.selected = true;
+        qtd.appendChild(option);
+    }
+
     const subtotal = document.createElement("div");
     subtotal.className = "subtotal";
 
     const preco = document.createElement("h2");
     preco.className = "preco";
-    preco.innerText = `R$ ${produto.preco}`;
+    preco.innerText = `R$ ${(produto.preco * produto.quantidadeSelecionada).toFixed(2)}`;
 
     const parcelas = document.createElement("div");
     parcelas.className = "parcelas";
@@ -360,13 +374,6 @@ async function inserirProdCarrinho(id) {
     quantidades.appendChild(quantidade);
     quantidades.appendChild(qtd);
 
-    for (let i = 1; i <= produto.quantidade; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.innerText = i;
-        qtd.appendChild(option);
-    }
-
     itemProduto.appendChild(subtotal);
     subtotal.appendChild(preco);
     subtotal.appendChild(parcelas);
@@ -388,11 +395,15 @@ async function inserirProdCarrinho(id) {
     });
 
     qtd.addEventListener("change", () => {
-        atualizaTotalCarrinho();
+        carrinho = carrinho.map(item => {
+            if (item.id === produto.id) item.quantidadeSelecionada = parseInt(qtd.value);
+            return item;
+        });
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
 
-        const subtotal = document.querySelector(".preco");
-        subtotal.innerText = `R$ ${produto.preco * qtd.value}`;
-    })
+        preco.innerText = `R$ ${(produto.preco * qtd.value).toFixed(2)}`;
+        atualizaTotalCarrinho();
+    });
 
     atualizaTotalCarrinho();
 }
