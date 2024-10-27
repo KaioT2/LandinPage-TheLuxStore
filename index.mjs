@@ -28,8 +28,11 @@ app.post('/checkout', async (req, res) => {
                 }
             ],
             mode: 'payment',
-            success_url: 'http://localhost/complete',
-            cancel_url: 'http://localhost/cancel'
+            shipping_address_collection: {
+                allowed_countries: ['BR']
+            },
+            success_url: `${process.env.BASE_URL}/complete?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.BASE_URL}/cancel`
         });
 
         console.log(session);
@@ -42,24 +45,22 @@ app.post('/checkout', async (req, res) => {
 
 
 app.get('/complete', async (req, res) => {
-        try {
-            const result = await Promise.all([
-                stripe.checkout.sessions.retrieve(req.query.session_id, { expand: ['payment_intent.payment_method'] }),
-                stripe.checkout.sessions.listLineItems(req.query.session_id)
-            ]);
-    
-            console.log(JSON.stringify(result));
-            res.send('Your payment was successful');
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('An error occurred');
-        }
-    });
+
+    const result = Promise.all([
+        stripe.checkout.sessions.retrieve(req.query.session_id, { expand: ['payment_intent.payment_method'] }),
+        stripe.checkout.sessions.listLineItems(req.query.session_id)
+    ])
+
+
+    console.log(JSON.stringify(await result));
+
+    res.send('Your payment was successful');
+});
     
     // Rota para cancelar o pagamento
-    app.get('/cancel', (req, res) => {
-        res.redirect('/');
-    });
+app.get('/cancel', (req, res) => {
+    res.redirect('/index.html');
+});
 
 // Servidor escutando na porta 80
 app.listen(80, () => {
