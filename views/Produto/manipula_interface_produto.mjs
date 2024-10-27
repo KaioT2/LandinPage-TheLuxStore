@@ -260,6 +260,12 @@ async function preencheTelaProd(id) {
 
     const btnAddCarrinho = document.querySelector(".btnAddCarrinho");
     const notificacao = document.getElementById("notificacao");
+    const botaoCarrinhoNotfica = document.querySelector("#notificacao > button"); 
+
+    botaoCarrinhoNotfica.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = `/Carrinho/paginaCarrinho.html`;
+    });
 
     btnAddCarrinho.addEventListener("click", (event) => {
         event.preventDefault();
@@ -430,15 +436,16 @@ async function inserirProdCarrinho(id) {
     atualizaTotalCarrinho();
 }
 
-
 async function atualizaTotalCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     let calculado = 0.0;
+    let quantidadeTotal = 0;
 
     carrinho.forEach(produto => {
         const quantidadeElement = document.getElementById(`qtd-${produto.id}`);
         const quantidade = quantidadeElement ? parseInt(quantidadeElement.value) : 1;
         calculado += produto.preco * quantidade;
+        quantidadeTotal += quantidade; // Conta a quantidade total
     });
 
     const valorFreteElement = document.querySelector('.valorFrete');
@@ -452,6 +459,10 @@ async function atualizaTotalCarrinho() {
     if (totalElement) {
         totalElement.innerText = `Total: R$ ${calculado.toFixed(2)}`;
     }
+
+    // Atualiza a quantidade de itens e o total no resumo
+    document.getElementById('quantidade-itens').innerText = `Nº Itens: ${quantidadeTotal}`;
+    document.getElementById('total').innerText = `Total: R$ ${calculado.toFixed(2)}`;
 }
 
 function carregarCarrinho() {
@@ -459,6 +470,54 @@ function carregarCarrinho() {
     carrinho.forEach(produto => inserirProdCarrinho(produto.id));
     atualizaTotalCarrinho();
     carrinhoVazio();
+}
+
+if(document.getElementById('finalizarPedido')){
+    document.getElementById('finalizarPedido').addEventListener('click', () => {
+        if (contarProdutosCarrinho()==0) {
+            alert("Carrinho vazio! Que tal ver algúns produtos?");
+        }
+        else if (confirm("Você deseja finalizar a compra?")) {
+            //alert("Compra finalizada! Obrigado!");
+
+            if(document.querySelector(".valorFrete")){
+                const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ","").replace(",",".");
+                guardafrete(frete);
+            }else{
+                localStorage.setItem('valorFrete', 0.00);
+            }
+            window.location.href = '/Carrinho/paginaPagamento.html';
+
+            
+        }
+    });
+}
+
+if(document.querySelector('.btnFinalizarCompra')){
+    document.querySelector('.btnFinalizarCompra').addEventListener('click', () => {
+        iniciarCheckout();
+        localStorage.removeItem('carrinho'); 
+        localStorage.removeItem('valorFrete'); 
+    });
+}
+
+async function iniciarCheckout() {
+    const precoElemento = document.querySelector('.precoFinal');
+    const precoTexto = precoElemento.innerText.replace('Total: R$', '').replace(',', '.');
+    const precoFinal = parseFloat(precoTexto);
+
+    const response = await fetch('/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ preco: precoFinal})
+    });
+
+    const data = await response.json();
+    if (data.url) {
+        window.location.href = data.url;
+    } else {
+        console.error('Erro ao redirecionar para o checkout');
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -473,8 +532,26 @@ window.addEventListener('DOMContentLoaded', () => {
             const productId = new URLSearchParams(window.location.search).get('id');
             if (productId) preencheTelaProd(productId);
             break;
-        case "/Produto/paginaCarrinho.html":
+        case "/Carrinho/paginaCarrinho.html":
             carregarCarrinho();
+            break;
+        case "/Carrinho/paginaPagamento.html":
+            carregarDadosPagamento();
             break;
     }
 });
+function guardafrete(frete) {
+    localStorage.setItem('valorFrete', frete);
+}
+
+function carregarDadosPagamento() {
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const totalProdutos = carrinho.reduce((total, item) => total + item.preco * item.quantidadeSelecionada, 0);
+    const quantidadeTotal = carrinho.reduce((total, item) => total + item.quantidadeSelecionada, 0);
+    const frete = parseFloat(localStorage.getItem('valorFrete') || '0');
+    const totalCompra = totalProdutos + frete;
+
+    // Atualiza os dados na página de pagamento
+    document.querySelector('.precoFinal').innerText = `Total: R$${totalCompra.toFixed(2)}`;
+    document.querySelector('.quantidadeFinal').innerText = `Quantidade: ${quantidadeTotal}`;
+}

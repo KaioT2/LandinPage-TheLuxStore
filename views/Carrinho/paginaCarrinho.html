@@ -13,7 +13,6 @@
 
 <body>
     <header>
-
         <nav class="menu">
             <nav>
                 <div class="menu-btn" id="menu-btn">
@@ -110,10 +109,10 @@
 
         <nav class="user-buttons">
             <div class="carrinho-btn" id="carrinho-btn">
-                <a href="./paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu" class="icone"></a>
+                <a href="../Carrinho/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
+                        class="icone"></a>
             </div>
         </nav>
-
     </header>
     <main>
         <nav class="nav-compras">
@@ -139,7 +138,14 @@
                     <div class="resultado-frete">
                     </div>
                 </div>
-                <h3 class="total">Total: R$0.00</h3>
+                <div class="resumo-pedido">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="resumo">
+                        <h3 id="total">Total: R$ 0.00</h3>
+                        <span id="quantidade-itens">Itens: 0</span>
+                    </div>
+                    <button type="button" class="btn-finalizar" id="finalizarPedido">Finalizar Compra</button>
+                </div>
             </div>
         </nav>
     </main>

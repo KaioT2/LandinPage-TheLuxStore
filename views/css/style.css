@@ -722,16 +722,16 @@ footer hr {
 
 .notificacao {
     position: fixed;
-    top: 20px; /* Distância do topo */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Compensa metade do tamanho para centralizar */
+    top: 20px;
+    left: 50%; 
+    transform: translateX(-50%); 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     gap: 5px;
-    background-color: #4caf50;
+    background-color: #049109;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -741,14 +741,37 @@ footer hr {
     transition: opacity 0.5s;
 }
 
+.notificacao > button{
+    border: 0px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    outline: none;
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    height: 30px;
+    padding: 0 24px;
+}
+
+.notificacao > button:hover{
+    background-color: #cacaca;
+}
+
 .oculto {
     opacity: 0;
     pointer-events: none;
+    display:none;
 }
 
 .visivel {
     opacity: 1;
     pointer-events: auto;
+    display: auto;
 }
 
 .container-compra{
@@ -903,6 +926,10 @@ footer hr {
 }
 
 .aviso{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-size: 12px;
     width: 90%;
 }
@@ -911,7 +938,6 @@ footer hr {
 .nav-compras{
     display: flex;
     flex-direction: column;
-    margin-bottom: 5000px;
 }
 
 .nav-compras > h2 {
@@ -1024,11 +1050,69 @@ footer hr {
 }
 
 .dadosPedido{
-    width: 70%;
     display: flex;
     margin-top: 30px;
+    margin-bottom: 30px;
     justify-content: center;
-    gap: 40%;
+    align-items: center;
+    gap: 200px;
+}
+
+.resumo-pedido{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #00000042;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.377);
+    gap:10px;
+}
+
+.resumo{
+    display: flex;
+    gap: 15px;
+}
+
+.btn-finalizar{
+    width: 100%;
+    background-color: #5D3F3D;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    height: 40px;
+}
+
+.btn-finalizar:hover{
+    color: #fff;
+    background-color: #049109;
+    transition: all ease 0.3s;
+}
+
+/* PÁGINA DE PAGAMENTO */
+
+.pedidoFinal{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerPedido{
+    display: flex;
+    max-width: 300px;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #a2a2a218;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.dadosCompraFinal{
+    display: flex;
+    flex-direction: column;
 }
 
 /* Responsividade */
@@ -1243,6 +1327,10 @@ footer hr {
     .valor{
         font-size: 1.7em;
     }
+
+    .frete{
+        width: 100%;
+    }
     
     .calculadora input{
         height: 40px;
@@ -1287,6 +1375,103 @@ footer hr {
     .aviso{
         font-size: 12px;
         width: 90%;
+    }
+
+    /* CARRINHO DE COMPRAS */
+
+    .nav-compras{
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .produtos{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+    
+    .produto{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background-color: #e3e3e38f;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .detalhe-prod{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        width: 250px;
+    }
+
+    .subtotal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .nomeProd{
+        font-size: 1.3em;
+    }
+    
+    .quantidades{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .quantidades > span{
+        font-size: 12px;
+    }
+    
+    .preco{
+        font-size: 1.2em;
+    }
+    
+    .qtd{
+        border: solid 2px black;
+        border-radius: 10%;
+        height: 30px;
+        padding: 5%;
+    }
+
+    .qtd > option{
+        font-size: 10px;
+    }
+
+    .dadosPedido { 
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* PÁGINA DE PAGAMENTO */
+
+    .container-pagamento{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        width: 95%;
+        gap: 15px;
+    }
+
+    #paymentForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #a2a2a248;
+        padding: 30px;
+        border-radius: 10px;
+        border: solid 1px #5D3F3D;
+        max-width: 350px;
     }
 }
 
@@ -1425,7 +1610,7 @@ footer hr {
     .infoCompra{
         max-width: 800px;
         margin-top: 0px;
-        margin-bottom: 500px;
+        /* margin-bottom: 50px; */
         gap: 15px;
     }
     
@@ -1487,5 +1672,60 @@ footer hr {
     
     .resultado-frete{
         margin-top: 10px;
+    }
+
+    /* CARRINHO DE COMPRAS */
+
+    .nav-compras{
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .produtos{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+    
+    .produto{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .detalhe-prod{
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        width: 250px;
+    }
+    
+    .nomeProd{
+        font-size: 1.3em;
+    }
+    
+    .quantidades{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .quantidades > span{
+        font-size: 12px;
+    }
+    
+    .preco{
+        font-size: 1.2em;
+    }
+    
+    .qtd{
+        border: solid 2px black;
+        border-radius: 10%;
+        height: 30px;
+        padding: 5%;
+    }
+
+    .qtd > option{
+        font-size: 10px;
     }
 }
