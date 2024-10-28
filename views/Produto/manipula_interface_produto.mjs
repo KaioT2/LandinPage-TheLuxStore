@@ -551,7 +551,21 @@ function carregarDadosPagamento() {
     const frete = parseFloat(localStorage.getItem('valorFrete') || '0');
     const totalCompra = totalProdutos + frete;
 
+    const listaProdutos = document.querySelector('.produtos-fim');
+    listaProdutos.innerHTML = ""; 
+
+    carrinho.forEach(produto => {
+        const item = document.createElement('li');
+        item.className = 'produto-item';
+        item.innerHTML = `
+            <span class="nome-produto">${produto.nome}</span> - 
+            <span class="quantidade-produto">${produto.quantidadeSelecionada}x</span> - 
+            <span class="preco-produto">R$ ${(produto.preco * produto.quantidadeSelecionada).toFixed(2)}</span>
+        `;
+        listaProdutos.appendChild(item);
+    });
+
     // Atualiza os dados na página de pagamento
-    document.querySelector('.precoFinal').innerText = `Total: R$${totalCompra.toFixed(2)}`;
-    document.querySelector('.quantidadeFinal').innerText = `Quantidade: ${quantidadeTotal}`;
+    document.querySelector('.quantidadeFinal').innerHTML = `<strong>Nº Itens:</strong> ${quantidadeTotal}`;
+    document.querySelector('.precoFinal').innerHTML = `<strong>Total:</strong> R$${totalCompra.toFixed(2)}`;
 }

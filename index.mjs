@@ -57,12 +57,10 @@ app.get('/complete', async (req, res) => {
     res.send('Your payment was successful');
 });
     
-    // Rota para cancelar o pagamento
 app.get('/cancel', (req, res) => {
     res.redirect('/index.html');
 });
 
-// Servidor escutando na porta 80
 app.listen(80, () => {
     console.log('Servidor escutando na porta 80');
 });
