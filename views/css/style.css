@@ -563,6 +563,7 @@ span.swiper-pagination-bullet {
 
 .img-produto img{
     max-height: 200px;
+    max-width: 100%;
 }
 
 /* Produtos em destaque */
@@ -1005,6 +1006,12 @@ footer hr {
     background-color: #00000015;
 }
 
+.produtos{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .produto{
     display: flex;
     flex-direction: row;
@@ -1101,6 +1108,7 @@ footer hr {
 .containerPedido{
     display: flex;
     height: 400px;
+    max-width: 90%;
     flex-direction: column;
     gap: 10px;
     align-items: center;
@@ -1138,7 +1146,7 @@ footer hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 200px;
     height: 35px;
     padding: 10px;
     border-radius: 10px;
@@ -1148,6 +1156,14 @@ footer hr {
 
 .btnFinalizarCompra:hover{
     background-color: #21cd27;
+}
+
+.pedidoFinal{
+    display: flex;
+    flex-direction: column;
+}
+.pedidoFinal > button > a{
+    color: #000;
 }
 
 /* Responsividade */
@@ -1762,5 +1778,9 @@ footer hr {
 
     .qtd > option{
         font-size: 10px;
+    }
+
+    .pedidoFinal{
+        margin-bottom: 200px;
     }
 }

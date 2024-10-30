@@ -29,7 +29,7 @@ app.post('/checkout', async (req, res) => {
             ],
             mode: 'payment',
             shipping_address_collection: {
-                allowed_countries: ['BR']
+                allowed_countries: ['BR', 'US']
             },
             success_url: `${process.env.BASE_URL}/complete?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.BASE_URL}/cancel`
@@ -54,7 +54,8 @@ app.get('/complete', async (req, res) => {
 
     console.log(JSON.stringify(await result));
 
-    res.send('Your payment was successful');
+   // res.send('Your payment was successful');
+   res.redirect('/Compra/paginaPosCompra.html');
 });
     
 app.get('/cancel', (req, res) => {

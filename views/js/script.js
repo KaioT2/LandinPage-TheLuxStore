@@ -92,7 +92,7 @@ function updateSwiper() {
         bannerBtn.innerText = "Levar";
 
     } else {
-        swiperPrincipal1.params.slidesPerView = 6; 
+        swiperPrincipal.params.slidesPerView = 6; 
         swiperPrincipal2.params.slidesPerView = 6; 
         bannerBtn.innerText = "Comprar agora";
     }

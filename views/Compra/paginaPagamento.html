@@ -13,6 +13,7 @@
 
 <body>
     <header>
+
         <nav class="menu">
             <nav>
                 <div class="menu-btn" id="menu-btn">
@@ -109,45 +110,24 @@
 
         <nav class="user-buttons">
             <div class="carrinho-btn" id="carrinho-btn">
-                <a href="../Carrinho/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
-                        class="icone"></a>
+                <a href="../Compra/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
+                    class="icone"></a>
             </div>
         </nav>
     </header>
     <main>
-        <nav class="nav-compras">
-
-            <h2>Meu carrinho</h2>
-            <hr class="linha">
-
-            <div class="container-carrinho">
-                <ul class="produtos" id="listaProd">
-                </ul>
-            </div>
-            <div class="vazio">
-            </div>
-            <hr class="linha">
-
-            <div class="dadosPedido">
-                <div class="frete">
-                    <span>Calcular frete</span>
-                    <div class="calculadora">
-                        <input type="text" id="cep" placeholder="00000-000">
-                        <button type="button" class="btnFrete" id="calcularFrete">Ok</button>
-                    </div>
-                    <div class="resultado-frete">
-                    </div>
+        <div class="pedidoFinal">
+            <div class="containerPedido">
+                <h2>Confirme seu pedido</h2>
+                <div class="dadosCompraFinal">
+                    <ul class="produtos-fim">
+                    </ul>
+                    <p class="quantidadeFinal">1</p>
+                    <p class="precoFinal">10.0</p>
                 </div>
-                <div class="resumo-pedido">
-                    <h3>Resumo do Pedido</h3>
-                    <div class="resumo">
-                        <h3 id="total">Total: R$ 0.00</h3>
-                        <span id="quantidade-itens">Itens: 0</span>
-                    </div>
-                    <button type="button" class="btn-finalizar" id="finalizarPedido">Finalizar Compra</button>
-                </div>
+                <button class="btnFinalizarCompra" >Realizar pagamento</button>
             </div>
-        </nav>
+        </div>
     </main>
 
     <footer>
@@ -201,5 +181,4 @@
 </body>
 <script src="../js/script.js"></script>
 <script src="../Produto/manipula_interface_produto.mjs" type="module"></script>
-
 </html>

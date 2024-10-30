@@ -5,6 +5,8 @@ async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
     const dados = await getLista();
 
+    console.log(dados);
+
     boxcontainers.forEach(function (boxcont) {
         for (let i = 0; i < dados.length; i++) {
             const swiper_slide = document.createElement('div');
@@ -38,8 +40,8 @@ async function inserirProdPrincipal() {
             const nomeProduto = document.createElement('p');
             nomeProduto.classList.add('nome-produto');
 
-            const detalhes = document.createElement('span');
-            detalhes.classList.add('detalhes');
+            // const detalhes = document.createElement('span');
+            // detalhes.classList.add('detalhes');
 
             const rate = document.createElement('span');
             rate.classList.add('rate');
@@ -52,7 +54,7 @@ async function inserirProdPrincipal() {
 
             id.innerText = dados[i].id;
             nomeProduto.innerText = dados[i].nome;
-            detalhes.innerText = dados[i].descricao;
+            //detalhes.innerText = dados[i].descricao;
 
             let aux = "";
             let cont, cont2;
@@ -79,7 +81,7 @@ async function inserirProdPrincipal() {
             div.appendChild(detalhesProduto);
             detalhesProduto.appendChild(type);
             type.appendChild(nomeProduto);
-            type.appendChild(detalhes);
+            //type.appendChild(detalhes);
             type.appendChild(rate);
             detalhesProduto.appendChild(preco);
 
@@ -139,8 +141,8 @@ async function inserirProdDestaque() {
             const nomeProduto = document.createElement('p');
             nomeProduto.classList.add('nome-produto');
 
-            const detalhes = document.createElement('span');
-            detalhes.classList.add('detalhes');
+            // const detalhes = document.createElement('span');
+            // detalhes.classList.add('detalhes');
 
             const rate = document.createElement('span');
             rate.classList.add('rate');
@@ -153,7 +155,7 @@ async function inserirProdDestaque() {
 
             id.innerText = dados[i].id;
             nomeProduto.innerText = dados[i].nome;
-            detalhes.innerText = dados[i].descricao;
+            //detalhes.innerText = dados[i].descricao;
 
             let aux = "";
             let cont, cont2;
@@ -182,7 +184,7 @@ async function inserirProdDestaque() {
             div.appendChild(detalhesBox);
             detalhesBox.appendChild(type);
             type.appendChild(nomeProduto);
-            type.appendChild(detalhes);
+            //type.appendChild(detalhes);
             type.appendChild(rate);
             detalhesBox.appendChild(preco);
 
@@ -260,11 +262,11 @@ async function preencheTelaProd(id) {
 
     const btnAddCarrinho = document.querySelector(".btnAddCarrinho");
     const notificacao = document.getElementById("notificacao");
-    const botaoCarrinhoNotfica = document.querySelector("#notificacao > button"); 
+    const botaoCarrinhoNotfica = document.querySelector("#notificacao > button");
 
     botaoCarrinhoNotfica.addEventListener("click", function (event) {
         event.preventDefault();
-        window.location.href = `/Carrinho/paginaCarrinho.html`;
+        window.location.href = `/Compra/paginaCarrinho.html`;
     });
 
     btnAddCarrinho.addEventListener("click", (event) => {
@@ -290,10 +292,10 @@ function contarProdutosCarrinho() {
     return quantidadeTotal;
 }
 
-function carrinhoVazio(){
-    if(contarProdutosCarrinho()==0){
+function carrinhoVazio() {
+    if (contarProdutosCarrinho() == 0) {
         const vazio = document.querySelector(".vazio");
-    
+
         vazio.innerHTML = '<h2>Seu carrinho está vazio!</h2><span>Você ainda não possui itens no seu carrinho.</span><button type="button" class="btnVazio">Ver produtos</button>';
 
         if (document.querySelector(".btnVazio")) {
@@ -334,9 +336,9 @@ async function inserirProdCarrinho(id) {
     nomeProd.className = "nomeProd";
     nomeProd.innerText = produto.nome;
 
-    const detalhes = document.createElement("span");
-    detalhes.className = "detalhes";
-    detalhes.innerText = produto.descricao;
+    // const detalhes = document.createElement("span");
+    // detalhes.className = "detalhes";
+    //  detalhes.innerText = produto.descricao;
 
     const quantidades = document.createElement("div");
     quantidades.className = "quantidades";
@@ -396,7 +398,7 @@ async function inserirProdCarrinho(id) {
     itemProduto.appendChild(imgProduto);
     itemProduto.appendChild(detalheProd);
     detalheProd.appendChild(nomeProd);
-    detalheProd.appendChild(detalhes);
+    //detalheProd.appendChild(detalhes);
 
     itemProduto.appendChild(quantidades);
     quantidades.appendChild(quantidade);
@@ -472,32 +474,32 @@ function carregarCarrinho() {
     carrinhoVazio();
 }
 
-if(document.getElementById('finalizarPedido')){
+if (document.getElementById('finalizarPedido')) {
     document.getElementById('finalizarPedido').addEventListener('click', () => {
-        if (contarProdutosCarrinho()==0) {
+        if (contarProdutosCarrinho() == 0) {
             alert("Carrinho vazio! Que tal ver algúns produtos?");
         }
         else if (confirm("Você deseja finalizar a compra?")) {
             //alert("Compra finalizada! Obrigado!");
 
-            if(document.querySelector(".valorFrete")){
-                const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ","").replace(",",".");
+            if (document.querySelector(".valorFrete")) {
+                const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ", "").replace(",", ".");
                 guardafrete(frete);
-            }else{
+            } else {
                 localStorage.setItem('valorFrete', 0.00);
             }
-            window.location.href = '/Carrinho/paginaPagamento.html';
+            window.location.href = '/Compra/paginaPagamento.html';
 
-            
+
         }
     });
 }
 
-if(document.querySelector('.btnFinalizarCompra')){
+if (document.querySelector('.btnFinalizarCompra')) {
     document.querySelector('.btnFinalizarCompra').addEventListener('click', () => {
         iniciarCheckout();
-        localStorage.removeItem('carrinho'); 
-        localStorage.removeItem('valorFrete'); 
+        localStorage.removeItem('carrinho');
+        localStorage.removeItem('valorFrete');
     });
 }
 
@@ -509,7 +511,7 @@ async function iniciarCheckout() {
     const response = await fetch('/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ preco: precoFinal})
+        body: JSON.stringify({ preco: precoFinal })
     });
 
     const data = await response.json();
@@ -531,11 +533,12 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/Produto/paginaProduto.html":
             const productId = new URLSearchParams(window.location.search).get('id');
             if (productId) preencheTelaProd(productId);
+            inserirProdDestaque();
             break;
-        case "/Carrinho/paginaCarrinho.html":
+        case "/Compra/paginaCarrinho.html":
             carregarCarrinho();
             break;
-        case "/Carrinho/paginaPagamento.html":
+        case "/Compra/paginaPagamento.html":
             carregarDadosPagamento();
             break;
     }
@@ -552,7 +555,7 @@ function carregarDadosPagamento() {
     const totalCompra = totalProdutos + frete;
 
     const listaProdutos = document.querySelector('.produtos-fim');
-    listaProdutos.innerHTML = ""; 
+    listaProdutos.innerHTML = "";
 
     carrinho.forEach(produto => {
         const item = document.createElement('li');

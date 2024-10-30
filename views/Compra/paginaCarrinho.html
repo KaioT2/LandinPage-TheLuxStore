@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <meta name="author" content="Kaio Dias">
-    <title></title>
     <link rel="icon" href="../images/logo.png" type="image/x-icon" style="border-radius: 50%;">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
     <header>
-
         <nav class="menu">
             <nav>
                 <div class="menu-btn" id="menu-btn">
@@ -115,73 +113,41 @@
                     class="icone"></a>
             </div>
         </nav>
-
-        <div id="notificacao" class="notificacao oculto">
-            <h3>- The Lux Style -</h3>
-            <span>Produto adicionado ao carrinho</span>
-            <button>Ver Carrinho</button>
-        </div>
-
     </header>
     <main>
         <nav class="nav-compras">
-            <div class="container-compra">
-                <div class="infoCompra">
-                    <div class="images">
-                        <div class="image-principal">
-                            <img src="" alt="" class="img-principal">
-                        </div>
-                        <div class="image-preview">
-                            <img src="" alt=""class="img-preview">
-                        </div>
-                    </div>
-                    <div class="detalhe-produto">
-                        <h2 class="nome-prod"></h2>
-                        <span class="rate"></span>
-                        <span class="detalhes"></span>
-                    </div>
-                    <div class="detalhes-compra">
-                        <div class="detalhes-valor">
-                            <h2 class="valor"></h2>
-                            <div class="parcelas">
-                                <img src="../images/cartao.png">
-                                <span>até 10x sem juros</span>
-                            </div>
-                            <a href="#" class="ver-mais">mais formas de pagamento</a>
-                        </div>
-                        <div class="frete">
-                            <span>Calcular frete</span>
-                            <div class="calculadora">
-                                <input type="text" id="cep" placeholder="00000-000">
-                                <button type="button" class="btnFrete" id="calcularFrete">Ok</button>
-                            </div>
 
-                            <div class="resultado-frete">
-                            </div>
+            <h2>Meu carrinho</h2>
+            <hr class="linha">
 
-                            <div class="totalCompra">
-                                
-                            </div>
-                        </div>
-                        <button type="button" class="btnAddCarrinho">Adicionar ao carrinho</button>
-                        <span class="aviso">Este produto conta com a garantia The Lux Style, que assegura sua compra, do pedido à entrega.</span>
+            <div class="container-carrinho">
+                <ul class="produtos" id="listaProd">
+                </ul>
+            </div>
+            <div class="vazio">
+            </div>
+            <hr class="linha">
+
+            <div class="dadosPedido">
+                <div class="frete">
+                    <span>Calcular frete</span>
+                    <div class="calculadora">
+                        <input type="text" id="cep" placeholder="00000-000">
+                        <button type="button" class="btnFrete" id="calcularFrete">Ok</button>
                     </div>
+                    <div class="resultado-frete">
+                    </div>
+                </div>
+                <div class="resumo-pedido">
+                    <h3>Resumo do Pedido</h3>
+                    <div class="resumo">
+                        <h3 id="total">Total: R$ 0.00</h3>
+                        <span id="quantidade-itens">Itens: 0</span>
+                    </div>
+                    <button type="button" class="btn-finalizar" id="finalizarPedido">Finalizar Compra</button>
                 </div>
             </div>
         </nav>
-
-        <div class="vitrine-destaque">
-            <div class="vitrine-header">
-                <hr>
-                <h2>Você também pode gostar de:</h2>
-                <hr>
-            </div>
-
-            <div class="swiper mySwiper produtos-slider" id="but">
-                <div class="swiper-wrapper container vitrineDestaque">
-                </div>
-            </div>
-        </div>
     </main>
 
     <footer>
@@ -232,9 +198,6 @@
             <p>© Kaio Dias - 2023</p>
         </div>
     </footer>
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 <script src="../js/script.js"></script>
 <script src="../Produto/manipula_interface_produto.mjs" type="module"></script>
