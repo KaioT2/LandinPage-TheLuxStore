@@ -343,7 +343,8 @@ header {
 }
 
 .box {
-    max-width: 300px;
+    width: 300px;
+    height: 484px;
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;
@@ -554,16 +555,17 @@ span.swiper-pagination-bullet {
 }
 
 .img-produto {
-    background-color: #e6e6e6;
+    background-color: #ffffff;
     height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: solid 1px #b9b9b9;
 }
 
 .img-produto img{
-    max-height: 200px;
-    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
 }
 
 /* Produtos em destaque */
@@ -822,7 +824,7 @@ footer hr {
     display: flex;
     flex-direction: column;
     margin: 30px;
-    width: 500px;
+    max-width: 500px;
 }
 
 .nome-prod{
@@ -1095,24 +1097,25 @@ footer hr {
     transition: all ease 0.3s;
 }
 
-/* PÁGINA DE PAGAMENTO */
+/* POPUP DE PAGAMENTO */
 
 .pedidoFinal{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    position: fixed;
+    top: 100px;
 }
 
 .containerPedido{
     display: flex;
-    height: 400px;
+    max-height: 400px;
     max-width: 90%;
     flex-direction: column;
     gap: 10px;
     align-items: center;
-    background-color: #a2a2a218;
+    background-color: #f3f3f3;
     border: 1px solid #000;
     border-radius: 20px;
     padding: 30px;
@@ -1166,6 +1169,33 @@ footer hr {
     color: #000;
 }
 
+.popup {
+    display: none;
+}
+
+.cabecalhopop{
+    display: flex;
+    gap: 20px;
+    justify-content: center;align-items: center;
+}
+
+.close-btn {
+    cursor: pointer;
+    color: #000;
+}
+
+.telaFinal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 50px;
+}
+
+.telaFinal > button > a{
+    color: #000;
+}
 /* Responsividade */
 
 @media screen and (min-width: 300px) and (max-width: 700px) {
@@ -1318,6 +1348,11 @@ footer hr {
         margin-top: 5px;
     }
 
+    .box{
+        width: 300px;
+        height: 444px;
+    }
+
     /* PÁGINA DE COMPRA */
     
     .infoCompra{
@@ -1325,7 +1360,7 @@ footer hr {
         justify-content: center;
         align-items: center;
         margin-top: 0px;
-        max-width: 680px;
+        max-width: 95%;
         gap: 15px;
     }
     
@@ -1355,10 +1390,12 @@ footer hr {
     }
     
     .detalhe-produto{
-        justify-content: left;
+        justify-content: center;
         align-items: center;
+        text-align: center;
         margin: 30px;
-        width: 500px;
+        max-width: 500px;
+        gap: 5px;
     }
     
     .nome-prod{
@@ -1370,8 +1407,8 @@ footer hr {
     }
     
     .detalhes-compra{
-        width: 400px;
-        align-items: left;
+        max-width: 300px;
+        align-items: center;
         margin-top: 0px;
     }
     
@@ -1501,7 +1538,11 @@ footer hr {
         gap: 30px;
     }
 
-    /* PÁGINA DE PAGAMENTO */
+    /* POPUP DE PAGAMENTO */
+
+    .pedidoFinal{
+        left: 3px;
+    }
 
     .container-pagamento{
         display: flex;
@@ -1677,7 +1718,7 @@ footer hr {
         display: flex;
         flex-direction: column;
         margin: 15px;
-        width: 450px;
+        max-width: 450px;
     }
     
     .nome-prod{
@@ -1686,16 +1727,26 @@ footer hr {
     
     .detalhes-produto > .detalhes{
         font-size: 17px;
+        display: flex;
+        justify-content: center;
     }
     
     .detalhes-compra{
-        width: 450px;
-        margin: 15px 30px 15px 15px;
+        width: 100%;
+        margin: 15px;
         gap: 20px;
     }
     
     .valor{
         font-size: 1.7em;
+    }
+
+    .parcelas{
+        font-size: 15px;
+    }
+
+    .ver-mais{
+        font-size: 10px;
     }
     
     .frete{
@@ -1723,6 +1774,10 @@ footer hr {
     
     .resultado-frete{
         margin-top: 10px;
+    }
+
+    .btnAddCarrinho{
+        font-size: 12px;
     }
 
     /* CARRINHO DE COMPRAS */
@@ -1782,5 +1837,11 @@ footer hr {
 
     .pedidoFinal{
         margin-bottom: 200px;
+    }
+
+    /* POPUP DE PAGAMENTO */
+
+    .pedidoFinal{
+        left: 3px;
     }
 }

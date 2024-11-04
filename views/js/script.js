@@ -88,12 +88,13 @@ function updateSwiper() {
 
         swiperPrincipal.params.slidesPerView = 4.2;
         swiperPrincipal2.params.slidesPerView = 4.2;
-        swiper.params.slidesPerView = 4.2; 
+        swiper.params.slidesPerView = 3.2; 
         bannerBtn.innerText = "Levar";
 
     } else {
         swiperPrincipal.params.slidesPerView = 6; 
         swiperPrincipal2.params.slidesPerView = 6; 
+        swiper.params.slidesPerView = 4.2; 
         bannerBtn.innerText = "Comprar agora";
     }
     swiper.update();

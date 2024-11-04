@@ -5,24 +5,31 @@ async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
     const dados = await getLista();
 
-    console.log(dados);
+    // Divide a lista de produtos em duas partes, uma para cada vitrine
+    const metade = Math.ceil(dados.length / 2);
+    const produtosVitrine1 = dados.slice(0, metade);
+    const produtosVitrine2 = dados.slice(metade);
 
-    boxcontainers.forEach(function (boxcont) {
-        for (let i = 0; i < dados.length; i++) {
+    const vitrines = [produtosVitrine1, produtosVitrine2];
+
+    vitrines.forEach((produtos, index) => {
+        const boxcont = boxcontainers[index];
+
+        produtos.forEach((produto) => {
             const swiper_slide = document.createElement('div');
             swiper_slide.classList.add('swiper-slide');
 
             const id = document.createElement('input');
             id.setAttribute('type', "hidden");
             id.setAttribute('id', "id");
-            id.value = dados[i].id;
+            id.value = produto.id;
 
             const containerProduto = document.createElement('div');
             containerProduto.classList.add('container-produto');
 
             const a = document.createElement('a');
             a.setAttribute('href', "#");
-            a.setAttribute('data-id', dados[i].id);
+            a.setAttribute('data-id', produto.id);
 
             const div = document.createElement('div');
 
@@ -30,6 +37,7 @@ async function inserirProdPrincipal() {
             imgProduto.classList.add('img-produto');
 
             const img = document.createElement('img');
+            img.setAttribute('src', produto.image_url);
 
             const detalhesProduto = document.createElement('div');
             detalhesProduto.classList.add('detalhes-produto');
@@ -39,49 +47,31 @@ async function inserirProdPrincipal() {
 
             const nomeProduto = document.createElement('p');
             nomeProduto.classList.add('nome-produto');
-
-            // const detalhes = document.createElement('span');
-            // detalhes.classList.add('detalhes');
+            nomeProduto.innerText = produto.nome;
 
             const rate = document.createElement('span');
             rate.classList.add('rate');
 
             const preco = document.createElement('span');
             preco.classList.add('preco');
+            preco.innerText = `R$${produto.preco}`;
 
-            const src = dados[i].image_url;
-            img.setAttribute('src', src);
-
-            id.innerText = dados[i].id;
-            nomeProduto.innerText = dados[i].nome;
-            //detalhes.innerText = dados[i].descricao;
-
+            // Preenchendo as estrelas de avaliação
             let aux = "";
-            let cont, cont2;
-            for (cont = 0; cont < dados[i].rate; cont++) {
-                aux += "&#9733;";
-            }
-            for (cont2 = cont; cont2 < 5; cont2++) {
-                aux += "&#9734;";
-            }
-
-            rate.innerHTML = `${aux} ${dados[i].rate}`;
-            preco.innerText = `\$${dados[i].preco}`;
+            for (let i = 0; i < produto.rate; i++) aux += "&#9733;";
+            for (let i = produto.rate; i < 5; i++) aux += "&#9734;";
+            rate.innerHTML = `${aux} ${produto.rate}`;
 
             boxcont.appendChild(swiper_slide);
-
             swiper_slide.appendChild(containerProduto);
             swiper_slide.appendChild(id);
             containerProduto.appendChild(a);
             a.appendChild(div);
-
             div.appendChild(imgProduto);
             imgProduto.appendChild(img);
-
             div.appendChild(detalhesProduto);
             detalhesProduto.appendChild(type);
             type.appendChild(nomeProduto);
-            //type.appendChild(detalhes);
             type.appendChild(rate);
             detalhesProduto.appendChild(preco);
 
@@ -89,13 +79,12 @@ async function inserirProdPrincipal() {
                 event.preventDefault();
                 const productId = this.getAttribute('data-id');
                 preencheTelaProd(productId);
-
                 window.location.href = `${window.location.origin}/Produto/paginaProduto.html?id=${productId}`;
-
             });
-        }
+        });
     });
 }
+
 
 async function inserirProdDestaque() {
     const boxcontainers = document.querySelectorAll('.vitrineDestaque');
@@ -141,9 +130,6 @@ async function inserirProdDestaque() {
             const nomeProduto = document.createElement('p');
             nomeProduto.classList.add('nome-produto');
 
-            // const detalhes = document.createElement('span');
-            // detalhes.classList.add('detalhes');
-
             const rate = document.createElement('span');
             rate.classList.add('rate');
 
@@ -155,7 +141,6 @@ async function inserirProdDestaque() {
 
             id.innerText = dados[i].id;
             nomeProduto.innerText = dados[i].nome;
-            //detalhes.innerText = dados[i].descricao;
 
             let aux = "";
             let cont, cont2;
@@ -167,7 +152,7 @@ async function inserirProdDestaque() {
             }
 
             rate.innerHTML = `${aux} ${dados[i].rate}`;
-            preco.innerText = `\$${dados[i].preco}`;
+            preco.innerText = `R$${dados[i].preco}`;
 
             boxcont.appendChild(swiper_slide);
 
@@ -184,7 +169,6 @@ async function inserirProdDestaque() {
             div.appendChild(detalhesBox);
             detalhesBox.appendChild(type);
             type.appendChild(nomeProduto);
-            //type.appendChild(detalhes);
             type.appendChild(rate);
             detalhesBox.appendChild(preco);
 
@@ -247,7 +231,7 @@ async function preencheTelaProd(id) {
 
     const valor = document.getElementsByClassName("valor");
     if (valor.length > 0) {
-        valor[0].innerText = `\$${produto.preco}`;
+        valor[0].innerText = `R$${produto.preco}`;
     }
 
     const btnCalcularFrete = document.querySelector("#calcularFrete");
@@ -336,10 +320,6 @@ async function inserirProdCarrinho(id) {
     nomeProd.className = "nomeProd";
     nomeProd.innerText = produto.nome;
 
-    // const detalhes = document.createElement("span");
-    // detalhes.className = "detalhes";
-    //  detalhes.innerText = produto.descricao;
-
     const quantidades = document.createElement("div");
     quantidades.className = "quantidades";
 
@@ -398,7 +378,6 @@ async function inserirProdCarrinho(id) {
     itemProduto.appendChild(imgProduto);
     itemProduto.appendChild(detalheProd);
     detalheProd.appendChild(nomeProd);
-    //detalheProd.appendChild(detalhes);
 
     itemProduto.appendChild(quantidades);
     quantidades.appendChild(quantidade);
@@ -462,7 +441,6 @@ async function atualizaTotalCarrinho() {
         totalElement.innerText = `Total: R$ ${calculado.toFixed(2)}`;
     }
 
-    // Atualiza a quantidade de itens e o total no resumo
     document.getElementById('quantidade-itens').innerText = `Nº Itens: ${quantidadeTotal}`;
     document.getElementById('total').innerText = `Total: R$ ${calculado.toFixed(2)}`;
 }
@@ -479,8 +457,7 @@ if (document.getElementById('finalizarPedido')) {
         if (contarProdutosCarrinho() == 0) {
             alert("Carrinho vazio! Que tal ver algúns produtos?");
         }
-        else if (confirm("Você deseja finalizar a compra?")) {
-            //alert("Compra finalizada! Obrigado!");
+        else {
 
             if (document.querySelector(".valorFrete")) {
                 const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ", "").replace(",", ".");
@@ -488,11 +465,21 @@ if (document.getElementById('finalizarPedido')) {
             } else {
                 localStorage.setItem('valorFrete', 0.00);
             }
-            window.location.href = '/Compra/paginaPagamento.html';
 
+            carregarDadosPagamento();
+            abrirPopup();
 
+            document.getElementById('popupPedido').addEventListener('click', fecharPopup);
         }
     });
+}
+
+function abrirPopup() {
+    document.getElementById('popupPedido').style.display = 'block';
+}
+
+function fecharPopup() {
+    document.getElementById('popupPedido').style.display = 'none';
 }
 
 if (document.querySelector('.btnFinalizarCompra')) {
@@ -538,11 +525,9 @@ window.addEventListener('DOMContentLoaded', () => {
         case "/Compra/paginaCarrinho.html":
             carregarCarrinho();
             break;
-        case "/Compra/paginaPagamento.html":
-            carregarDadosPagamento();
-            break;
     }
 });
+
 function guardafrete(frete) {
     localStorage.setItem('valorFrete', frete);
 }

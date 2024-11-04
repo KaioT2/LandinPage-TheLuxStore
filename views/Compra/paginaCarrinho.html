@@ -110,12 +110,29 @@
         <nav class="user-buttons">
             <div class="carrinho-btn" id="carrinho-btn">
                 <a href="../Compra/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
-                    class="icone"></a>
+                        class="icone"></a>
             </div>
         </nav>
     </header>
     <main>
         <nav class="nav-compras">
+            <div id="popupPedido" class="popup">
+                <div class="pedidoFinal">
+                    <div class="containerPedido">
+                        <div class="cabecalhopop">
+                            <h2>Confirme seu pedido</h2>
+                            <h2 class="close-btn" id="closePopup">&times;</h2>
+                        </div>
+                        <div class="dadosCompraFinal">
+                            <ul class="produtos-fim"></ul>
+                            <p class="quantidadeFinal">1</p>
+                            <p class="precoFinal">10.0</p>
+                        </div>
+                        <button class="btnFinalizarCompra">Realizar pagamento</button>
+                    </div>
+                </div>
+            </div>
+
 
             <h2>Meu carrinho</h2>
             <hr class="linha">
