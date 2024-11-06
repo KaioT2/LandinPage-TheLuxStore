@@ -5,7 +5,6 @@ async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
     const dados = await getLista();
 
-    // Divide a lista de produtos em duas partes, uma para cada vitrine
     const metade = Math.ceil(dados.length / 2);
     const produtosVitrine1 = dados.slice(0, metade);
     const produtosVitrine2 = dados.slice(metade);
@@ -56,7 +55,6 @@ async function inserirProdPrincipal() {
             preco.classList.add('preco');
             preco.innerText = `R$${produto.preco}`;
 
-            // Preenchendo as estrelas de avaliação
             let aux = "";
             for (let i = 0; i < produto.rate; i++) aux += "&#9733;";
             for (let i = produto.rate; i < 5; i++) aux += "&#9734;";
@@ -553,7 +551,6 @@ function carregarDadosPagamento() {
         listaProdutos.appendChild(item);
     });
 
-    // Atualiza os dados na página de pagamento
     document.querySelector('.quantidadeFinal').innerHTML = `<strong>Nº Itens:</strong> ${quantidadeTotal}`;
     document.querySelector('.precoFinal').innerHTML = `<strong>Total:</strong> R$${totalCompra.toFixed(2)}`;
 }

@@ -12,7 +12,7 @@ app.use(express.static('views'));
 
 app.post('/checkout', async (req, res) => {
     try {
-        const { preco } = req.body; // Recebe o valor enviado pelo frontend
+        const { preco } = req.body;
 
         const session = await stripe.checkout.sessions.create({
             line_items: [
@@ -22,11 +22,12 @@ app.post('/checkout', async (req, res) => {
                         product_data: {
                             name: 'Compra The Lux Style'
                         },
-                        unit_amount: Math.round(preco * 100)  // Converte para centavos
+                        unit_amount: Math.round(preco * 100) 
                     },
                     quantity: 1
                 }
             ],
+            payment_method_types: ['card', 'boleto'],
             mode: 'payment',
             shipping_address_collection: {
                 allowed_countries: ['BR', 'US']
@@ -51,10 +52,8 @@ app.get('/complete', async (req, res) => {
         stripe.checkout.sessions.listLineItems(req.query.session_id)
     ])
 
-
     console.log(JSON.stringify(await result));
 
-   // res.send('Your payment was successful');
    res.redirect('/Compra/paginaPosCompra.html');
 });
     

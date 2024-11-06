@@ -5,7 +5,7 @@ async function consultarCEP(cep) {
         const dados = await response.json();
 
         if (dados.erro) throw new Error("CEP inválido.");
-        return dados; // Retorna os dados do CEP
+        return dados; 
     } catch (error) {
         console.error("Erro ao consultar CEP:", error);
         alert("CEP inválido ou não encontrado.");
