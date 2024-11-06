@@ -426,7 +426,7 @@ async function atualizaTotalCarrinho() {
         const quantidadeElement = document.getElementById(`qtd-${produto.id}`);
         const quantidade = quantidadeElement ? parseInt(quantidadeElement.value) : 1;
         calculado += produto.preco * quantidade;
-        quantidadeTotal += quantidade; // Conta a quantidade total
+        quantidadeTotal += quantidade;
     });
 
     const valorFreteElement = document.querySelector('.valorFrete');
