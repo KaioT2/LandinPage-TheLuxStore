@@ -22,7 +22,11 @@ Para acessar o código do projeto aconcelha-se que tenha um editor de código co
 
 5 - Se necessário instalar as dependências do projeto execute o seguinte comando no terminal: npm install dotenv@^16.4.5 ejs@^3.1.10 express@^4.21.1 mysql2@^3.11.3 sequelize@^6.37.4 stripe@^17.2.1 ;
 
-6 - Para dúvidas entre em contato por email: kaiofd20062@gmail.com 
+6 - Para dúvidas entre em contato por email: kaiofd20062@gmail.com ;
+
+## 📌Observação: 
+
+- Ao realizar o pagamento, use o cartão de número "4242 4242 4242 4242", pois, por motivos de segurança, somente o modo de testes da api funciona nesse projeto;
 
 ## 🧭 Recursos em desenvolvimento:
 
