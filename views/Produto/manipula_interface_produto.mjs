@@ -167,8 +167,9 @@ async function inserirProdDestaque() {
             div.appendChild(detalhesBox);
             detalhesBox.appendChild(type);
             type.appendChild(nomeProduto);
+            type.appendChild(preco);
             type.appendChild(rate);
-            detalhesBox.appendChild(preco);
+            
 
             btnComprar.innerText = "Comprar agora";
 

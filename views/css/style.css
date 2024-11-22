@@ -367,7 +367,9 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    align-items: left;
     padding: 10px 20px;
     box-sizing: border-box;
     background-color: #fff;
@@ -388,6 +390,10 @@ header {
 
 .type span, .detalhes, .rate {
     color: #000;
+}
+
+.rate{
+    font-size: 0.7em;
 }
 
 .preco {

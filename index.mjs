@@ -1,13 +1,24 @@
 import 'dotenv/config';
 import express from 'express';
 import Stripe from 'stripe';
+
 import rotas_produtos from './rotas/rotas_produtos.mjs';
+import rotas_categorias from './rotas/rotas_categorias.mjs';
+import rotas_compras from './rotas/rotas_compras.mjs';
+import rotas_clientes from './rotas/rotas_clientes.mjs';
+import rotas_itensCompra from './rotas/rotas_itensCompras.mjs';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
 app.use(express.json());
+
+app.use('/categorias', rotas_categorias);
+app.use('/clientes', rotas_clientes);
+app.use('/compras', rotas_compras);
+app.use('/itensCompras', rotas_itensCompra);
 app.use('/produtos', rotas_produtos);
+
 app.use(express.static('views'));
 
 app.post('/checkout', async (req, res) => {
