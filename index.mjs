@@ -7,6 +7,9 @@ import rotas_categorias from './rotas/rotas_categorias.mjs';
 import rotas_compras from './rotas/rotas_compras.mjs';
 import rotas_clientes from './rotas/rotas_clientes.mjs';
 import rotas_itensCompra from './rotas/rotas_itensCompras.mjs';
+import rotas_carrinho from './rotas/rotas_carrinho.mjs';
+import rotas_itensCarrinho from './rotas/rotas_item_carrinho.mjs';
+import rotas_endereco from './rotas/rotas_endereco.mjs';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
@@ -18,6 +21,9 @@ app.use('/clientes', rotas_clientes);
 app.use('/compras', rotas_compras);
 app.use('/itensCompras', rotas_itensCompra);
 app.use('/produtos', rotas_produtos);
+app.use('/carrinhos', rotas_carrinho);
+app.use('/itensCarrinho', rotas_itensCarrinho);
+app.use('/carrinho', rotas_carrinho);
 
 app.use(express.static('views'));
 

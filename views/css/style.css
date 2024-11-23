@@ -199,9 +199,14 @@ header {
     flex-direction: row;
     align-items: left;
     margin-right: 50px;
+    gap: 15px;
 }
 
 .carrinho-btn a > img{
+    width: 40px;
+}
+
+.perfil-btn a > img{
     width: 40px;
 }
 
