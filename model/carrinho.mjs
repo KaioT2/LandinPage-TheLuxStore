@@ -5,6 +5,4 @@ const Carrinho = conexao.define('Carrinho', {
     total: DataTypes.DECIMAL
 });
 
-Carrinho.sync();
-
 export default Carrinho;

@@ -4,7 +4,7 @@ import Cliente from "../model/cliente.mjs";
 async function novo(req, res){
     const criado =  await Carrinho.create({
         total: req.body.total,
-        idCliente: req.body.idCliente
+        ClienteId: req.body.idCliente
     });
     res.json(criado);
 }

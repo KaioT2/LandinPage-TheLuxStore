@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { altera, exclui, novo, todos, um } from "../controles/controle_carrinho.mjs";
+import { altera, exclui, novo, todos, um } from "../controles/controle_item_carrinho.mjs";
 
-const rotas_carrinho = Router();
+const rotas_item_carrinho = Router();
 
-rotas_carrinho.post('/cadastrar', novo);
-rotas_carrinho.get('/listar', todos);
-rotas_carrinho.get('/listar/:id', um);
-rotas_carrinho.put('/editar', altera);
-rotas_carrinho.delete('/excluir', exclui);
+rotas_item_carrinho.post('/cadastrar', novo);
+rotas_item_carrinho.get('/listar', todos);
+rotas_item_carrinho.get('/listar/:id', um);
+rotas_item_carrinho.put('/editar', altera);
+rotas_item_carrinho.delete('/excluir', exclui);
 
-export default rotas_carrinho;
+export default rotas_item_carrinho;

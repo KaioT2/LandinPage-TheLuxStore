@@ -9,6 +9,5 @@ const Endereco = conexao.define('Endereco', {
     cep: DataTypes.STRING
 });
 
-Endereco.sync();
 
 export default Endereco;

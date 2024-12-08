@@ -7,9 +7,9 @@ const Cliente = conexao.define('Cliente', {
     dataNasc: DataTypes.DATE,
     telefone: DataTypes.STRING,
     email: DataTypes.STRING,
-    senha: DataTypes.STRING
+    senha: DataTypes.STRING,
+    isLogged:DataTypes.BOOLEAN
 });
 
-Cliente.sync();
 
 export default Cliente;

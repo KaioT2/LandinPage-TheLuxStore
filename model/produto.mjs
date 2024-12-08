@@ -10,6 +10,5 @@ const Produto = conexao.define('Produto', {
     quantidade: DataTypes.INTEGER
 });
 
-Produto.sync();
 
 export default Produto;
