@@ -19,8 +19,8 @@ Item_Venda.belongsTo(Produto);
 Venda.hasMany(Item_Venda);
 Item_Venda.belongsTo(Venda);
 
-Carrinho.hasOne(Venda);
-Venda.belongsTo(Carrinho);
+// Carrinho.hasOne(Venda);
+// Venda.belongsTo(Carrinho);
 
 Cliente.hasMany(Venda);
 Venda.belongsTo(Cliente);

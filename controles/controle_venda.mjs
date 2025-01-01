@@ -1,5 +1,6 @@
 import Venda from "../model/venda.mjs";
 import Cliente from "../model/cliente.mjs";
+import Carrinho from "../model/carrinho.mjs";
 
 async function novo(req, res){
     const criado =  await Venda.create({

@@ -13,7 +13,7 @@ import rotas_carrinho from './rotas/rotas_carrinho.mjs';
 import rotas_itensCarrinho from './rotas/rotas_item_carrinho.mjs';
 import rotas_endereco from './rotas/rotas_endereco.mjs';
 
-import { setPaymentIntentId } from './views/js/paymentState.js'
+import { setPaymentIntentId } from './views/js/paymentState.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
@@ -58,8 +58,6 @@ app.post('/checkout', async (req, res) => {
             cancel_url: `${process.env.BASE_URL}/cancel`
         });
 
-        //console.log(session);
-
         res.json({ url: session.url });
     } catch (error) {
         console.error('Erro na criação da sessão de pagamento:', error);
@@ -74,7 +72,7 @@ app.get('/complete', async (req, res) => {
         stripe.checkout.sessions.retrieve(req.query.session_id, { expand: ['payment_intent.payment_method'] }),
         stripe.checkout.sessions.listLineItems(req.query.session_id),
       ]);
-  
+      
       const paymentIntentId = session.payment_intent.id;
       setPaymentIntentId(paymentIntentId);
   

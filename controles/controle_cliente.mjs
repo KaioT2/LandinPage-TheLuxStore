@@ -3,26 +3,36 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = "sua-chave-secreta";
-
 async function login(req, res) {
-    const { email, senha } = req.body;
+    try {
+        const { email, senha } = req.body;
 
-    const cliente = await Cliente.findOne({ where: { email } });
-    if (!cliente) {
-        return res.status(404).json({ error: "Usuário não encontrado" });
+        if (!email || !senha) {
+            return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+        }
+
+        const cliente = await Cliente.findOne({ where: { email } });
+        if (!cliente) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        const senhaValida = await bcrypt.compare(senha, cliente.senha);
+        if (!senhaValida) {
+            return res.status(401).json({ error: 'Senha incorreta' });
+        }
+
+        cliente.isLogged = true;
+        
+        await cliente.save();
+
+        const token = jwt.sign({ idCliente: cliente.id }, SECRET_KEY, { expiresIn: '1h' });
+
+        res.json({ message: 'Login realizado com sucesso', token });
+
+    } catch (error) {
+        console.error('Erro no login:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
     }
-
-    const senhaValida = await bcrypt.compare(senha, cliente.senha);
-    if (!senhaValida) {
-        return res.status(401).json({ error: "Senha incorreta" });
-    }
-
-    cliente.isLogged = true;
-    await cliente.save();
-
-    const token = jwt.sign({ idCliente: cliente.id }, SECRET_KEY, { expiresIn: '1h' });
-    localStorage.setItem('token', token);
-    res.json({ message: "Login realizado com sucesso", token });
 }
 
 async function logout(req, res) {
@@ -92,19 +102,18 @@ async function exclui (req, res){
 }
 
 function autenticarToken(req, res, next) {
-    const token = req.headers['authorization']?.split(' ')[1]; // 'Bearer <token>'
+    const token = req.headers['authorization']?.split(' ')[1]; 
     if (!token) {
         return res.status(401).json({ error: 'Token não fornecido' });
     }
 
     try {
         const payload = jwt.verify(token, SECRET_KEY);
-        req.idCliente = payload.idCliente; // Adiciona o `idCliente` à requisição
+        req.idCliente = payload.idCliente; 
         next();
     } catch (error) {
         return res.status(403).json({ error: 'Token inválido' });
     }
 }
 
-export {novo, todos, altera,exclui, um, login, logout};
-export default { autenticarToken };
+export {novo, todos, altera,exclui, um, login, logout, autenticarToken };

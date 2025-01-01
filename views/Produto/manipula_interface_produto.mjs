@@ -1,7 +1,8 @@
 import { buscaUm, getLista } from "./acessa_dados_produto.mjs";
 import { consultarCEP, calcularFrete, exibirFrete } from "../Frete/acessa_dados_frete.mjs";
 import { getListaitensCarrinho, novoitensCarrinho, alteraitensCarrinho, excluiitensCarrinho } from "../Itenscarrinho/acessa_dados_Itenscarrinho.mjs";
-import {atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio} from "../Carrinho/manipula_interface_carrinho.mjs";
+import { atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio, confereCliente } from "../Carrinho/manipula_interface_carrinho.mjs";
+import { decodeToken } from "../utils/decode.mjs";
 
 async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
@@ -170,7 +171,7 @@ async function inserirProdDestaque() {
             type.appendChild(nomeProduto);
             type.appendChild(preco);
             type.appendChild(rate);
-            
+
 
             btnComprar.innerText = "Comprar agora";
 
@@ -255,34 +256,50 @@ async function preencheTelaProd(id) {
 
     btnAddCarrinho.addEventListener("click", (event) => {
         event.preventDefault();
-        const productId = new URLSearchParams(window.location.search).get('id');
-        inserirProdCarrinho(productId);
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Você precisa estar logado para adicionar produtos ao carrinho.");
+            return;
+        } else {
 
-        notificacao.classList.remove('oculto');
-        notificacao.classList.add('visivel');
+            const productId = new URLSearchParams(window.location.search).get('id');
+            inserirProdCarrinho(productId);
 
-        setTimeout(() => {
-            notificacao.classList.remove('visivel');
-            notificacao.classList.add('oculto');
-        }, 3000);
+            notificacao.classList.remove('oculto');
+            notificacao.classList.add('visivel');
+
+            setTimeout(() => {
+                notificacao.classList.remove('visivel');
+                notificacao.classList.add('oculto');
+            }, 3000);
+        }
     });
-
 }
 
-async function inserirProdCarrinho(idProduto/*idCliente*/) {
+async function inserirProdCarrinho(idProduto) {
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Você precisa estar logado para adicionar produtos ao carrinho.");
+        return;
+    }
+
+    const {idCliente} = decodeToken(token);
+
     const listaProd = document.querySelector('#listaProd');
-    
+
     const produto = await buscaUm(idProduto);
-    
+
     let carrinhoItens = await getListaitensCarrinho();
-    
+
+    carrinhoItens = carrinhoItens.filter(item => item?.Carrinho?.Cliente?.id === idCliente);
 
     let itemExistente = carrinhoItens.find(item => item.Produto.id === produto.id);
-    
+
     if (!itemExistente) {
         itemExistente = await novoitensCarrinho({
             idProduto,
-            idCliente:1,
+            idCliente,
             quantidade: 1
         });
 
@@ -345,7 +362,7 @@ async function inserirProdCarrinho(idProduto/*idCliente*/) {
 
     function renderizarCarrinho() {
         listaProd.innerHTML = "";
-        carrinhoItens.forEach(item => inserirProdCarrinho(item.ProdutoId/*idCliente*/));
+        carrinhoItens.forEach(item => inserirProdCarrinho(item.ProdutoId, idCliente));
     }
 
     btnRemove.addEventListener("click", async () => {
@@ -353,7 +370,7 @@ async function inserirProdCarrinho(idProduto/*idCliente*/) {
 
         carrinhoItens = carrinhoItens.filter(item => item.id !== itemExistente.id);
         renderizarCarrinho();
-        await atualizaTotalCarrinho(/*idCliente*/);
+        await atualizaTotalCarrinho(idCliente);
         carrinhoVazio();
     });
 
@@ -380,7 +397,7 @@ async function inserirProdCarrinho(idProduto/*idCliente*/) {
             const endereco = await consultarCEP(cepInput);
             const frete = await calcularFrete(cepInput);
             exibirFrete(endereco, frete);
-            atualizaTotalCarrinho();
+            atualizaTotalCarrinho(idCliente);
         } else {
             alert("Por favor, insira um CEP válido.");
         }
@@ -396,10 +413,10 @@ async function inserirProdCarrinho(idProduto/*idCliente*/) {
             quantidade: novaQuantidade
         });
         preco.innerText = `R$ ${(produto.preco * novaQuantidade).toFixed(2)}`;
-        await atualizaTotalCarrinho(/*idCliente*/);
+        await atualizaTotalCarrinho(idCliente);
     });
 
-    await atualizaTotalCarrinho(/*idCliente*/);
+    await atualizaTotalCarrinho(idCliente);
 }
 
 if (document.getElementById('finalizarPedido')) {
@@ -409,11 +426,11 @@ if (document.getElementById('finalizarPedido')) {
         } else {
             try {
                 if (document.querySelector(".valorFrete")) {
-                const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ", "").replace(",", ".");
-                guardafrete(frete);
-            } else {
-                localStorage.setItem('valorFrete', 0.00);
-            }
+                    const frete = document.querySelector(".valorFrete").innerText.replace("Frete: R$ ", "").replace(",", ".");
+                    guardafrete(frete);
+                } else {
+                    localStorage.setItem('valorFrete', 0.00);
+                }
                 carregarDadosPagamento();
                 abrirPopup();
 
@@ -466,18 +483,21 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     switch (path) {
         case "/index.html":
-            await inserirProdPrincipal(); 
-            await inserirProdDestaque(); 
+            await inserirProdPrincipal();
+            await inserirProdDestaque();
             break;
         case "/Produto/paginaProduto.html":
             const productId = new URLSearchParams(window.location.search).get('id');
             if (productId) {
-                await preencheTelaProd(productId); 
+                await preencheTelaProd(productId);
             }
-            await inserirProdDestaque(); 
+            await inserirProdDestaque();
             break;
         case "/Compra/paginaCarrinho.html":
-            await carregarCarrinho(/*idCliente*/); 
+            confereCliente();
+            const token = localStorage.getItem('token');
+            const { idCliente } = decodeToken(token);
+            await carregarCarrinho(idCliente);
             break;
         default:
             console.warn(`Nenhuma ação associada ao caminho: ${path}`);

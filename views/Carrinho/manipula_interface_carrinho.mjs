@@ -1,11 +1,12 @@
 import { getListaitensCarrinho, excluiitensCarrinho } from "../Itenscarrinho/acessa_dados_Itenscarrinho.mjs";
 import { buscaUmCarrinho, excluiCarrinho } from "../Carrinho/acessa_dados_carrinho.mjs";
 import { inserirProdCarrinho } from "../Produto/manipula_interface_produto.mjs";
+import { decodeToken } from "../utils/decode.mjs";
 
-async function atualizaTotalCarrinho(/*idCliente*/) {
+async function atualizaTotalCarrinho(idCliente) {
     const carrinhoItens = await getListaitensCarrinho();
 
-    const itensCliente = carrinhoItens.filter(item => item.Carrinho.ClienteId === 1/*idCliente*/);
+    const itensCliente = carrinhoItens.filter(item => item.Carrinho.ClienteId === idCliente);
     
     let calculado = 0.0;
     let quantidadeTotal = 0;
@@ -13,7 +14,7 @@ async function atualizaTotalCarrinho(/*idCliente*/) {
     itensCliente.forEach(item => {
         const quantidadeElement = document.getElementById(`qtd-${item.id}`);
         const quantidade = quantidadeElement ? parseInt(quantidadeElement.value) : item.quantidade;
-        calculado += item.Produto.preco * quantidade; // Supondo que 'Produto' está relacionado a ItemCarrinho
+        calculado += item.Produto.preco * quantidade;
         quantidadeTotal += quantidade;
     });
 
@@ -40,7 +41,7 @@ async function atualizaTotalCarrinho(/*idCliente*/) {
     }
 }
 
-async function carregarCarrinho(/*idCliente*/) {
+async function carregarCarrinho(idCliente) {
     try {
         const carrinhoItens = await getListaitensCarrinho();
 
@@ -50,25 +51,30 @@ async function carregarCarrinho(/*idCliente*/) {
 
         if (carrinhoItens.length > 0) {
             const idCarrinho = carrinhoItens[0]?.CarrinhoId;
-            guardaCarrinho(idCarrinho); // Armazena o ID do carrinho
+            guardaCarrinho(idCarrinho); 
         } else {
             console.warn("Nenhum item encontrado no carrinho.");
         }
-
-        const itensCliente = carrinhoItens.filter(item => item?.Carrinho?.ClienteId === 1/*idCliente*/);
         
-        console.log("Itens do cliente encontrados:", itensCliente);
+        const itensCliente = carrinhoItens.filter(item => item?.Carrinho?.Cliente?.id === idCliente);
+        
+        if(itensCliente.length > 0) {
+            console.log("Itens do cliente encontrados:", itensCliente);
 
-        await Promise.all(itensCliente.map(async item => {
-            if (item?.ProdutoId) {
-                await inserirProdCarrinho(item.ProdutoId);
-            } else {
-                console.warn("Item inválido encontrado no carrinho:", item);
-            }
-        }));
+            await Promise.all(itensCliente.map(async item => {
+                if (item?.ProdutoId) {
+                    await inserirProdCarrinho(item.ProdutoId);
+                } else {
+                    console.warn("Item inválido encontrado no carrinho:", item);
+                }
+            }));
 
-        await atualizaTotalCarrinho();
+        await atualizaTotalCarrinho(idCliente);
         carrinhoVazio(itensCliente.length);
+        }else{
+            await atualizaTotalCarrinho(idCliente);
+            carrinhoVazio(itensCliente.length);
+        }
     } catch (error) {
         console.error("Erro ao carregar o carrinho:", error);
     }
@@ -76,17 +82,18 @@ async function carregarCarrinho(/*idCliente*/) {
 
 async function limparCarrinho(idCarrinho) {
     try {
+
+        const carrinho = await buscaUmCarrinho(idCarrinho);
+        if (carrinho) {
+            await excluiCarrinho(idCarrinho);
+        }
+
         const itensCarrinho = await getListaitensCarrinho();
 
         const itensDoCarrinho = itensCarrinho.filter(item => item.CarrinhoId === idCarrinho);
 
         for (const item of itensDoCarrinho) {
             await excluiitensCarrinho(item.id);
-        }
-
-        const carrinho = await buscaUmCarrinho(idCarrinho);
-        if (carrinho) {
-            await excluiCarrinho(idCarrinho);
         }
 
         console.log(`Carrinho (ID: ${idCarrinho}) e seus itens foram removidos com sucesso.`);
@@ -97,7 +104,10 @@ async function limparCarrinho(idCarrinho) {
 }
 
 async function carrinhoVazio() {
-    if (await contarProdutosCarrinho() == 0) {
+    const token = localStorage.getItem('token');
+    const { idCliente } = decodeToken(token); 
+
+    if (await contarProdutosCarrinho(idCliente) == 0) {
         const vazio = document.querySelector(".vazio");
 
         vazio.innerHTML = '<h2>Seu carrinho está vazio!</h2><span>Você ainda não possui itens no seu carrinho.</span><button type="button" class="btnVazio">Ver produtos</button>';
@@ -112,10 +122,10 @@ async function carrinhoVazio() {
     }
 }
 
-async function contarProdutosCarrinho(/*idCliente*/) {
+async function contarProdutosCarrinho(idCliente) {
     const carrinhoItens = await getListaitensCarrinho();
 
-    const itensCliente = carrinhoItens.filter(item => item.Carrinho.ClienteId === 1/*idCliente*/);
+    const itensCliente = carrinhoItens.filter(item => item.Carrinho.ClienteId === idCliente);
 
     const quantidadeTotal = itensCliente.reduce((total, item) => total + item.quantidade, 0);
 
@@ -126,9 +136,10 @@ function guardafrete(frete) {
     localStorage.setItem('valorFrete', frete);
 }
 
-let carrinho;
+var carrinho;
 function guardaCarrinho(idcarrinho){
     carrinho = idcarrinho;
+    console.log(carrinho);
 }
 
 function pegaCarrinho(){
@@ -173,7 +184,6 @@ async function carregarDadosPagamento() {
             listaProdutos.appendChild(itemElemento);
         });
 
-        // Atualiza os valores no DOM
         document.querySelector('.quantidadeFinal').innerHTML = `<strong>Nº Itens:</strong> ${quantidadeTotal}`;
         document.querySelector('.precoFinal').innerHTML = `<strong>Total:</strong> R$${totalCompra.toFixed(2)}`;
     } catch (error) {
@@ -181,4 +191,14 @@ async function carregarDadosPagamento() {
     }
 }
 
-export {atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, guardaCarrinho, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio};
+function confereCliente() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "../Cliente/PaginaLogin.html"; 
+        return false;
+    }
+    return decodeToken(token);
+}
+
+export {atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, guardaCarrinho, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio, confereCliente};

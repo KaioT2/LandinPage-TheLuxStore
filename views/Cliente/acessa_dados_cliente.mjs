@@ -1,5 +1,45 @@
 import urlBackEnd from "../constantes/urls.mjs";
 
+async function login(obj) {
+    try {
+        const response = await fetch('/clientes/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Erro no login');
+        }
+
+        const data = await response.json();
+
+        localStorage.setItem('token', data.token); 
+        window.location.href = '../index.html'; 
+        return data.message; 
+    } catch (error) {
+        console.error('Erro no login:', error);
+        throw error;
+    }
+}
+
+async function logout(obj) {
+    try {
+        const response = await fetch('/clientes/logout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+        });
+        localStorage.clear();
+        window.location.href = '../Cliente/paginaLogin.html'; 
+
+    } catch (error) {
+        console.error('Erro ao realizar logout:', error);
+    }
+}
+
+
 async function getListaclientes() {
     const resposta = await fetch(urlBackEnd + '/clientes/listar');
     const clientes = await resposta.json();
@@ -51,4 +91,4 @@ async function excluiclientes(indice) {
     return apagado;
 }
 
-export { getListaclientes, buscaUmclientes, novoclientes, alteraclientes, excluiclientes };
+export { getListaclientes, buscaUmclientes, novoclientes, alteraclientes, excluiclientes, login, logout };
