@@ -22,41 +22,56 @@
 
         <nav class="user-buttons">
             <div class="perfil-btn" id="perfil-btn">
-                <a href="../Cliente/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
+                <a href="../Login/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
                     class="icone"></a>
             </div>
 
             <div class=" carrinho-btn" id="carrinho-btn">
-                <a href="../Compra/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
+                <a href="../Carrinho/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
                     class="icone"></a>
             </div>
         </nav>
     </header>
     <main>
-        <div class="loginContainer">
-            <h2>Criar Conta The Lux Style</h2>
-
+        <div class="criarContainer">
             <div>
+                <h2>Criar conta The Lux Style</h2>
                 <form>
-                    <!-- <label for="nome">Nome</label>
-                    <input type="text" id="nome">
-                    <br>
-                    <label for="telefone">Telefone</label>
-                    <input type="text" id="telefone">
-                    <br> -->
-                    <label for="email">Email</label>
-                    <input type="text" id="email">
-                    <br>
-                    <!-- <label for="cpf">Cpf</label>
-                    <input type="text" id="cpf">
-                    <br>
-                    <label for="dataNasc">Data de Nascimento:</label>
-                    <input type="text" id="dataNasc">
-                    <br> -->
-                    <label for="senha">Senha</label>
-                    <input type="text" id="senha">
+                    <div class="divide">
+                        <div>
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome">
+                        </div>
+                        
+                        <div>
+                            <label for="telefone">Telefone</label>
+                            <input type="text" id="telefone">
+                        </div>
+                        
+                        <div>
+                            <label for="email">Email</label>
+                            <input type="text" id="email">
+                        </div>
+                    </div>
+                    
+                    <div class="divide">
+                        <div>
+                            <label for="cpf">Cpf</label>
+                            <input type="text" id="cpf">
+                        </div>
+                        
+                        <div>
+                            <label for="dataNasc">Data de Nascimento:</label>
+                            <input type="text" id="dataNasc">
+                        </div>
+                        
+                        <div>
+                            <label for="senha">Senha</label>
+                            <input type="text" id="senha">
+                        </div>
+                    </div>
                 </form>
-                <button id="btnLogin">Entrar</button>
+                <button id="btnCriar" class="btnCriar">Criar</button>
             </div>
         </div>
     </main>
@@ -111,5 +126,5 @@
     </footer>
 </body>
 <script src="../js/script.js"></script>
-<script src="./manipula_interface_login.mjs" type="module"></script>
+<script src="./manipula_interface_criar.mjs" type="module"></script>
 </html>

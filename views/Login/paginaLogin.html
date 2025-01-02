@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <meta name="author" content="Kaio Dias">
+    <link rel="icon" href="../images/logo.png" type="image/x-icon" style="border-radius: 50%;">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <header>
+
+        <nav class="menu">
+            <div class="header-logo">
+                <a href="../index.html"><img src="../images/logo.png" alt="logo" class="logo-image"></a>
+            </div>
+        </nav>
+
+        <nav class="user-buttons">
+            <div class="perfil-btn" id="perfil-btn">
+                <a href="../Login/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
+                    class="icone"></a>
+            </div>
+
+            <div class=" carrinho-btn" id="carrinho-btn">
+                <a href="../Carrinho/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
+                    class="icone"></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="loginContainer">
+            <div>
+                <h2>Fazer Login The Lux Style</h2>
+                <form>
+                    <label for="email">Email</label>
+                    <input type="text" id="email">
+
+                    <label for="senha">Senha</label>
+                    <input type="text" id="senha">
+                </form>
+                <button id="btnLogin" class="btnLogin">Entrar</button>
+                <span>Não tem conta? <a href="./paginaCriarConta.html">Criar conta</a></span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-principal">
+            <div class="filiais">
+                <h2>Encontre nossas lojas</h2>
+
+                <div class="locais">
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>Florida</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>California</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+
+                    <div class="locais-item">
+                        <div>
+                            <h2>Texas</h2>
+                            <span>456 Holt Street</span>
+                            <span>(123)678-098</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social">
+                <a href="#"><img src="../images/twitter.png" alt="Twitter"></a>
+                <a href="#"><img src="../images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../images/facebook.png" alt="Facebook"></a>
+
+                <h2>#TheLuxStyle</h2>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="copy">
+            <p>© Kaio Dias - 2024</p>
+        </div>
+    </footer>
+</body>
+<script src="../js/script.js"></script>
+<script src="./manipula_interface_login.mjs" type="module"></script>
+</html>

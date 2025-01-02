@@ -146,10 +146,10 @@ function pegaCarrinho(){
     return carrinho;
 }
 
-async function carregarDadosPagamento() {
+async function carregarDadosPagamento(idCliente) {
     try {
         const carrinhoItens = await getListaitensCarrinho();
-        const itensCliente = carrinhoItens.filter(item => item?.Carrinho?.ClienteId === 1); 
+        const itensCliente = carrinhoItens.filter(item => item?.Carrinho?.ClienteId === idCliente); 
         if (!itensCliente.length) {
             console.warn("Carrinho vazio ou sem itens para o cliente.");
             return;
@@ -161,7 +161,6 @@ async function carregarDadosPagamento() {
         const quantidadeTotal = itensCliente.reduce((total, item) => total + item.quantidade, 0);
 
         const valorFreteElement = document.querySelector('.valorFrete');
-        console.log(valorFreteElement);
 
         let frete=0;
         if(document.querySelector(".valorFrete")){
@@ -195,7 +194,7 @@ function confereCliente() {
     const token = localStorage.getItem('token');
     if (!token) {
         alert("Você precisa estar logado para acessar esta página.");
-        window.location.href = "../Cliente/PaginaLogin.html"; 
+        window.location.href = "../Login/PaginaLogin.html"; 
         return false;
     }
     return decodeToken(token);

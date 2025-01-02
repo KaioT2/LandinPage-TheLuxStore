@@ -32,7 +32,7 @@ async function logout(obj) {
             body: JSON.stringify(obj)
         });
         localStorage.clear();
-        window.location.href = '../Cliente/paginaLogin.html'; 
+        window.location.href = '../Login/paginaLogin.html'; 
 
     } catch (error) {
         console.error('Erro ao realizar logout:', error);
@@ -91,4 +91,9 @@ async function excluiclientes(indice) {
     return apagado;
 }
 
-export { getListaclientes, buscaUmclientes, novoclientes, alteraclientes, excluiclientes, login, logout };
+async function verificaClienteExistente(email, cpf) {
+    const clientes = await getListaclientes();
+    return clientes.some(cliente => cliente.email === email || cliente.cpf === cpf);
+}
+
+export { getListaclientes, buscaUmclientes, novoclientes, alteraclientes, excluiclientes, login, logout, verificaClienteExistente };

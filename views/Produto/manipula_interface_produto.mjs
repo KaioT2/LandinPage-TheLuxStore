@@ -210,7 +210,6 @@ async function preencheTelaProd(id) {
     const rate = document.getElementsByClassName("rate");
     if (rate.length > 0) {
 
-
         let aux = "";
         let cont, cont2;
         for (cont = 0; cont < produto.rate; cont++) {
@@ -219,7 +218,6 @@ async function preencheTelaProd(id) {
         for (cont2 = cont; cont2 < 5; cont2++) {
             aux += "&#9734;";
         }
-
 
         rate[0].innerHTML = aux + " " + produto.rate;
     }
@@ -251,7 +249,7 @@ async function preencheTelaProd(id) {
 
     botaoCarrinhoNotfica.addEventListener("click", function (event) {
         event.preventDefault();
-        window.location.href = `/Compra/paginaCarrinho.html`;
+        window.location.href = `/Carrinho/paginaCarrinho.html`;
     });
 
     btnAddCarrinho.addEventListener("click", (event) => {
@@ -431,7 +429,9 @@ if (document.getElementById('finalizarPedido')) {
                 } else {
                     localStorage.setItem('valorFrete', 0.00);
                 }
-                carregarDadosPagamento();
+                const token = localStorage.getItem('token');
+                const {idCliente} = decodeToken(token);
+                carregarDadosPagamento(idCliente);
                 abrirPopup();
 
             } catch (error) {
@@ -493,7 +493,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
             await inserirProdDestaque();
             break;
-        case "/Compra/paginaCarrinho.html":
+        case "/Carrinho/paginaCarrinho.html":
             confereCliente();
             const token = localStorage.getItem('token');
             const { idCliente } = decodeToken(token);
