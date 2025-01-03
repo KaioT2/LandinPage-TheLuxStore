@@ -255,6 +255,15 @@ header {
     color: #5D3F3D;
 }
 
+.dropdown-conta{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-conta:hover .dropdown-content {
+    display: block;
+}
+
 .mobile-menu {
     display: none;
 }
@@ -314,6 +323,10 @@ header {
     align-items: left;
     margin-right: 50px;
     gap: 15px;
+}
+
+#btLogOut{
+    cursor:pointer;
 }
 
 .carrinho-btn a > img{

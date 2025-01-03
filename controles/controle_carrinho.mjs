@@ -40,4 +40,13 @@ async function exclui (req, res){
     res.json(cat);
 }
 
-export {novo, todos, altera,exclui, um};
+async function excluiCarrinhoPorCliente(idCliente) {
+
+    const carrinho = await Carrinho.findOne({
+        where: { ClienteId: idCliente }
+    });
+
+    await carrinho.destroy();
+}
+
+export {novo, todos, altera, exclui, um, excluiCarrinhoPorCliente};

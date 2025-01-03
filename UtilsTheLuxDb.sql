@@ -81,7 +81,16 @@ end $
 DELIMITER ;
 
 
+ALTER TABLE itemcarrinhos
+DROP FOREIGN KEY itemcarrinhos_ibfk_2;
 
+ALTER TABLE itemcarrinhos
+ADD CONSTRAINT itemcarrinhos_ibfk_2
+FOREIGN KEY (CarrinhoId) REFERENCES carrinhos(id)
+ON DELETE CASCADE;
+
+
+select * from clientes;
 select * from carrinhos;
 select * from itemcarrinhos;
 select * from vendas;

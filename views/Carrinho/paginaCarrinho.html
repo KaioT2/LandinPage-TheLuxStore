@@ -109,8 +109,14 @@
 
         <nav class="user-buttons">
             <div class="perfil-btn" id="perfil-btn">
-                <a href="../Login/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
-                    class="icone"></a>
+                <div class="dropdown-conta">
+                    <a href="../Login/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
+                        class="icone"></a>
+                    <div class="dropdown-content">
+                        <a href="#">Minha Conta</a>
+                        <a id="btLogOut">LOGOUT</a>
+                    </div>
+                </div>
             </div>
 
             <div class="carrinho-btn" id="carrinho-btn">
@@ -222,6 +228,7 @@
     </footer>
 </body>
 <script src="../js/script.js"></script>
+<script src="../utils/logOut.mjs" type="module"></script>
 <script src="../Produto/manipula_interface_produto.mjs" type="module"></script>
 
 </html>

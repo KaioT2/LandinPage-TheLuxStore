@@ -13,7 +13,9 @@ import rotas_carrinho from './rotas/rotas_carrinho.mjs';
 import rotas_itensCarrinho from './rotas/rotas_item_carrinho.mjs';
 import rotas_endereco from './rotas/rotas_endereco.mjs';
 
-import { setPaymentIntentId } from './views/js/paymentState.js';
+import { atualizarVendaSemPaymentIntent } from './views/utils/setPaymentIntent.mjs';
+
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const app = express();
@@ -67,24 +69,26 @@ app.post('/checkout', async (req, res) => {
 
 
 app.get('/complete', async (req, res) => {
-    try {
-      const [session, lineItems] = await Promise.all([
-        stripe.checkout.sessions.retrieve(req.query.session_id, { expand: ['payment_intent.payment_method'] }),
-        stripe.checkout.sessions.listLineItems(req.query.session_id),
-      ]);
-      
-      const paymentIntentId = session.payment_intent.id;
-      setPaymentIntentId(paymentIntentId);
-  
-      res.redirect('/Compra/paginaPosCompra.html');
-    } catch (error) {
-      console.error('Erro ao processar a conclusão da compra:', error);
-      res.status(500).send('Erro ao completar a compra.');
-    }
-  });
+  try {
+    const [session, lineItems] = await Promise.all([
+      stripe.checkout.sessions.retrieve(req.query.session_id, { expand: ['payment_intent.payment_method'] }),
+      stripe.checkout.sessions.listLineItems(req.query.session_id),
+    ]);
+
+    const paymentIntentId = session.payment_intent.id;
+
+    await atualizarVendaSemPaymentIntent(paymentIntentId);
+
+    res.redirect('/Compra/paginaPosCompra.html');
+  } catch (error) {
+    console.error('Erro ao processar a conclusão da compra:', error);
+    res.status(500).send('Erro ao completar a compra.');
+  }
+});
   
     
-app.get('/cancel', (req, res) => {
+app.get('/cancel', async (req, res) => {
+  await atualizarVendaSemPaymentIntent("cancelada");
     res.redirect('/index.html');
 });
 
@@ -107,6 +111,7 @@ app.post('/refund', async (req, res) => {
         message: 'Reembolso criado com sucesso!',
         refund,
       });
+      await atualizarVendaSemPaymentIntent("reembolsada");
     } catch (error) {
       console.error('Erro ao processar o reembolso:', error);
       res.status(500).json({
@@ -116,6 +121,43 @@ app.post('/refund', async (req, res) => {
       });
     }
   });
+  
+
+  app.post('/status-compra', async (req, res) => {
+    const { paymentIntentId } = req.body;
+  
+    if (!paymentIntentId) {
+      return res.status(400).json({
+        success: false,
+        message: 'ID do Payment Intent é obrigatório.',
+      });
+    }
+  
+    try {
+      // Recupera o PaymentIntent
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+  
+      // Recupera os reembolsos associados, se existirem
+      const refunds = await stripe.refunds.list({
+        payment_intent: paymentIntentId,
+      });
+  
+      res.status(200).json({
+        success: true,
+        status: paymentIntent.status, // Status do pagamento
+        amount_received: paymentIntent.amount_received / 100, // Valor recebido (convertido de centavos)
+        refunds: refunds.data, // Lista de reembolsos
+      });
+    } catch (error) {
+      console.error('Erro ao buscar o status da compra:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Erro ao buscar o status da compra.',
+        error: error.message,
+      });
+    }
+  });
+  
   
 
 app.listen(80, () => {
