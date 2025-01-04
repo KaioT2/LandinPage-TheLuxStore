@@ -9,105 +9,198 @@
     <meta name="author" content="Kaio Dias">
 
     <link rel="icon" href="../images/logo.png" type="image/x-icon" style="border-radius: 50%;">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>The Lux Style</title>
 </head>
 
 <body>
-    <header>
-
-        <nav class="menu">
-            <nav>
-                <div class="menu-btn" id="menu-btn">
-                    <img src="../images/menuIcon.png" alt="menu" class="icone">
+    <div class="dashboardContent">
+        <div class="menu-lateral">
+            <div class="logo-menu">
+                <img src="../images/logo.png" alt="logo">
+            </div>
+            <div class="menu-lateral-content">
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Dashboard</h3>
+                    </a>
                 </div>
-            </nav>
-
-            <div class="header-logo">
-                <a href="../index.html"><img src="../images/logo.png" alt="logo" class="logo-image"></a>
-            </div>
-        </nav>
-
-        <nav class="user-buttons">
-            <div class="perfil-btn" id="perfil-btn">
-                <div class="dropdown-conta">
-                    <a href="../Login/paginaLogin.html"><img src="../images/perfil.png" alt="menu"
-                        class="icone"></a>
-                    <div class="dropdown-content">
-                        <a href="#">Minha Conta</a>
-                        <a id="btLogOut">LOGOUT</a>
-                    </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Relatórios</h3>
+                    </a>
                 </div>
-            </div>
-
-            <div class="carrinho-btn" id="carrinho-btn">
-                <a href="../Carrinho/paginaCarrinho.html"><img src="../images/carrinho-de-compras.png" alt="menu"
-                    class="icone"></a>
-            </div>
-        </nav>
-
-    </header>
-
-    <main> 
-
-    </main>
-
-    <footer>
-        <div class="footer-principal">
-            <div class="filiais">
-                <h2>Encontre nossas lojas</h2>
-
-                <div class="locais">
-
-                    <div class="locais-item">
-                        <div>
-                            <h2>Florida</h2>
-                            <span>456 Holt Street</span>
-                            <span>(123)678-098</span>
-                        </div>
-                    </div>
-
-                    <div class="locais-item">
-                        <div>
-                            <h2>California</h2>
-                            <span>456 Holt Street</span>
-                            <span>(123)678-098</span>
-                        </div>
-                    </div>
-
-                    <div class="locais-item">
-                        <div>
-                            <h2>Texas</h2>
-                            <span>456 Holt Street</span>
-                            <span>(123)678-098</span>
-                        </div>
-                    </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Vendas</h3>
+                    </a>
                 </div>
-            </div>
-
-            <div class="social">
-                <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
-                <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
-                <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
-
-                <h2>#TheLuxStyle</h2>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Funcionários</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Produtos</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>LogOut</h3>
+                    </a>
+                </div>
             </div>
         </div>
+        <div class="dashboardMain">
+            <h1>Dashboard The Lux</h1>
 
-        <hr>
+            <div class="filtro-data">
+                <input type="date" name="filtro" id="dataInicio">
+                <input type="date" name="filtro" id="dataFim">
+            </div>
 
-        <div class="copy">
-            <p>© Kaio Dias - 2024</p>
+            <div class="indicesFinanceiros">
+                <div class="indice-content">
+                    <div class="indice-icon i1">
+                        <img src="../images/crescimento.png" alt="">
+                    </div>
+                    <div class="indice">
+                        <div>
+                            <span>Título Índice</span>
+                            <h3>R$ 10000,00</h3>
+                        </div>
+                        <div class="progresso">
+                            <div class="chart-container">
+                                <canvas id="doughnutChart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="indice-content">
+                    <div class="indice-icon i2">
+                        <img src="../images/crescimento.png" alt="">
+                    </div>
+                    <div class="indice">
+                        <div>
+                            <span>Título Índice</span>
+                            <h3>R$ 10000,00</h3>
+                        </div>
+                        <div class="progresso">
+                            <div class="chart-container">
+                                <canvas id="doughnutChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="indice-content">
+                    <div class="indice-icon i3">
+                        <img src="../images/crescimento.png" alt="">
+                    </div>
+                    <div class="indice">
+                        <div>
+                            <span>Título Índice</span>
+                            <h3>R$ 10000,00</h3>
+                        </div>
+                        <div class="progresso">
+                            <div class="chart-container">
+                                <canvas id="doughnutChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabelaVendas">
+                <h2>Vendas Recentes</h2>
+                <table> 
+                    <thead>
+                     <tr>
+                       <th>Cliente</th>
+                       <th>Total</th>
+                       <th>Data Venda</th>
+                       <th>Status</th>
+                     </tr>
+                    </thead>
+                     <tbody id="tbody1">
+                        <tr>
+                          <td>Mini USB</td>
+                          <td>4563</td>
+                          <td>Due</td>
+                          <td class="warning">Pending</td>
+                          <td class="primary">Details</td>
+                        </tr>
+                        <tr>
+                         <td>Mini USB</td>
+                         <td>4563</td>
+                         <td>Due</td>
+                         <td class="warning">Pending</td>
+                         <td class="primary">Details</td>
+                       </tr>
+                       <tr>
+                         <td>Mini USB</td>
+                         <td>4563</td>
+                         <td>Due</td>
+                         <td class="warning">Pending</td>
+                         <td class="primary">Details</td>
+                       </tr>
+                       <tr>
+                         <td>Mini USB</td>
+                         <td>4563</td>
+                         <td>Due</td>
+                         <td class="warning">Pending</td>
+                         <td class="primary">Details</td>
+                       </tr>
+                     </tbody>
+                </table>
+             </div>
         </div>
-    </footer>
+        <div class="dashboardDireita">
+            <div class="perfil-content">
+                <div class="perfil-info">
+                    <span class="nome">Kaio Dias</span>
+                    <p class="cargo">Administrador</p>
+                </div>
+                <a href="#" class="perfil-image">
+                    <img src="../images/fotoPerfil.jpg" alt="perfil">
+                </a>
+            </div>
+            <div class="pfc">
+                <h3>Cadastrados</h2>
+                <div class="pfc-content">
+                    <img src="../images/produto.png" alt="produto">
+                    <span> 1200 Produtos cadastrados</span>
+                </div>
+                <div class="pfc-content">
+                    <img src="../images/funcionarios.png" alt="produto">
+                    <span> 40 Funcionarios cadastrados</span>
+                </div>
+                <div class="pfc-content">
+                    <img src="../images/funcionarios.png" alt="produto">
+                    <span> 1000 Clientes cadastrados</span>
+                </div>
+            </div>
+            <div class="indiceVendas">
+                <h3>Índices de Vendas</h2>
+                <div class="indice-item">
+                    <img src="../images/crescimento.png" alt="">
+                    <span>50000 Vendas Concluídas</span>
+                </div>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+                <div class="indice-item">
+                    <img src="../images/devolvidas.png" alt="">
+                    <span>50000 Vendas Reembolsadas</span>
+                </div>
 
-
+                <div class="indice-item">
+                    <img src="../images/canceladas.png" alt="">
+                    <span>50000 Vendas Canceladas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- vendas reembolsadas, concluidas e canceladas -->
 </body>
-<script src="js/script.js"></script>
-<script src="./utils/logOut.mjs" type="module"></script>
-<script src="./Produto/manipula_interface_produto.mjs" type="module"></script>
+<script src="./dashboard.mjs"></script>
+
 </html>

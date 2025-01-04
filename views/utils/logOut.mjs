@@ -18,3 +18,7 @@ btLogOut.addEventListener("click", async () => {
         return
     }
 });
+
+document.querySelector("#btnDashboard").addEventListener("click", async () => {
+    window.location.href = "http://localhost/Dashboard/dashboard.html";
+    })
