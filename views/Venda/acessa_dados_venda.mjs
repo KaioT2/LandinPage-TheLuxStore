@@ -1,15 +1,15 @@
 import urlBackEnd from "../constantes/urls.mjs";
 
-async function getListaProduto() {
-    const resposta = await fetch(urlBackEnd + '/produtos/listar');
-    const produtos = await resposta.json();
-    return produtos;
+async function getLista() {
+    const resposta = await fetch(urlBackEnd + '/vendas/listar');
+    const vendas = await resposta.json();
+    return vendas;
 }
 
 async function buscaUm(id){
-    const resposta = await fetch(urlBackEnd + '/produtos/listar/' + id);
-    const produto = await resposta.json();
-    return produto;
+    const resposta = await fetch(urlBackEnd + '/vendas/listar/' + id);
+    const venda = await resposta.json();
+    return venda;
 }
 
 async function novo(obj) {
@@ -20,7 +20,7 @@ async function novo(obj) {
         },
         body: JSON.stringify(obj)
     };
-    const resposta = await fetch(urlBackEnd + '/produtos/cadastrar', opt);
+    const resposta = await fetch(urlBackEnd + '/vendas/cadastrar', opt);
     const cadastrado = await resposta.json();
     return cadastrado;
 }
@@ -33,7 +33,7 @@ async function altera(obj) {
         },
         body: JSON.stringify(obj)
     };  
-    const resposta = await fetch(urlBackEnd + '/produtos/editar', opt);
+    const resposta = await fetch(urlBackEnd + '/vendas/editar', opt);
     const editado = await resposta.json();
     return editado;
 }
@@ -46,9 +46,9 @@ async function exclui(indice) {
     },
     body: JSON.stringify({id: indice})
     };
-    const resposta = await fetch(urlBackEnd + '/produtos/excluir', opt);
+    const resposta = await fetch(urlBackEnd + '/vendas/excluir', opt);
     const apagado = await resposta.json();
     return apagado;
 }
 
-export { getListaProduto, buscaUm, novo, altera, exclui };
+export { getLista, buscaUm, novo, altera, exclui };

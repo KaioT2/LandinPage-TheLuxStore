@@ -26,22 +26,17 @@
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="#">
-                        <h3>Relatórios</h3>
-                    </a>
-                </div>
-                <div class="menuitem">
-                    <a href="#">
+                    <a href="../Venda/venda.html">
                         <h3>Vendas</h3>
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="#">
+                    <a href="../Funcionario/funcionarios.html">
                         <h3>Funcionários</h3>
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="#">
+                    <a href="./produtos.html">
                         <h3>Produtos</h3>
                     </a>
                 </div>
@@ -73,13 +68,14 @@
                         </div>
                         <div class="dado">
                             <label for="rate">Rate</label>
-                            <input type="text" name="rate" id="cpf">
+                            <input type="text" name="rate" id="rate">
                         </div>
                     </div>
                     <div class="separa">
                         <div class="dado">
                             <label for="imgUrl">Url Imagem</label>
-                            <input type="text" name="imgUrl" id="imgUrl">
+                            <input type="file" name="image_url" id="image_url">
+                            <span>Selecione da pasta "../views/Images"</span>
                         </div>
 
                         <div class="dado">
@@ -90,7 +86,7 @@
                             <button class="btnCadastrar" id="btnCadastrar">Cadastrar</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
             <div class="tabela">
@@ -127,38 +123,21 @@
                 <h3>Cadastrados</h2>
                     <div class="pfc-content">
                         <img src="../images/produto.png" alt="produto">
-                        <span> 1200 Produtos cadastrados</span>
+                        <span id="pfcProd"> 1200 Produtos cadastrados</span>
                     </div>
                     <div class="pfc-content">
-                        <img src="../images/funcionarios.png" alt="produto">
-                        <span> 40 Funcionarios cadastrados</span>
+                        <img src="../images/funcionarios.png" alt="funcionarios">
+                        <span id="pfcFunc"> 40 Funcionarios cadastrados</span>
                     </div>
                     <div class="pfc-content">
-                        <img src="../images/funcionarios.png" alt="produto">
-                        <span> 1000 Clientes cadastrados</span>
-                    </div>
-            </div>
-            <div class="indiceVendas">
-                <h3>Índices de Vendas</h2>
-                    <div class="indice-item">
-                        <img src="../images/crescimento.png" alt="">
-                        <span>50000 Vendas Concluídas</span>
-                    </div>
-
-                    <div class="indice-item">
-                        <img src="../images/devolvidas.png" alt="">
-                        <span>50000 Vendas Reembolsadas</span>
-                    </div>
-
-                    <div class="indice-item">
-                        <img src="../images/canceladas.png" alt="">
-                        <span>50000 Vendas Canceladas</span>
+                        <img src="../images/funcionarios.png" alt="clientes">
+                        <span id="pfcCli"> 1000 Clientes cadastrados</span>
                     </div>
             </div>
         </div>
     </div>
 </body>
-<script src="./dashboard.mjs"></script>
-<script src="./manipula_interface_funcionario.mjs" type="module" ></script>
+<script src="./manipula_interface_produto.mjs" type="module"></script>
+<script type="module" src="../utils/calculaRegistro.mjs"></script>
 
 </html>

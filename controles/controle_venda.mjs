@@ -13,7 +13,7 @@ async function novo(req, res){
 }
 
 async function todos (req, res){
-    const todos = await Venda.findAll();
+    const todos = await Venda.findAll({include:Cliente});
     res.json(todos);
 }
 

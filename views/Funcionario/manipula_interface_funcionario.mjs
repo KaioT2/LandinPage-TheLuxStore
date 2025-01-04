@@ -1,6 +1,5 @@
+import { calculaFolhaPag } from "../Dashboard/manipula_interface_dashboard.mjs";
 import { altera, buscaUm, exclui, getListaFuncionario, novo } from "./acessa_dados_funcionario.mjs";
-
-let indiceSelecionado = -1;
 
 async function salvar() {
     const iptNome = document.getElementById('nome');
@@ -82,6 +81,9 @@ async function preencheDadosParaEdicao(event) {
 }
 
 async function desenhaTabela() {
+
+    await folhaPagamento();
+
     const tbody = document.getElementById('tbody1');
     tbody.innerHTML = '';
     const dados = await getListaFuncionario();
@@ -116,20 +118,15 @@ async function desenhaTabela() {
 
         tr.append(td1, td2, td3, td4, td5,td6);
 
-        tr.addEventListener('click', () => selecionarLinha(i));
-        
-        if (i === indiceSelecionado) {
-            tr.style.backgroundColor = '#f6f6f6'; 
-        }
-
         tbody.append(tr);
     }
     
 }
 
-function selecionarLinha(indice) {
-    indiceSelecionado = indice;
-    desenhaTabela();
+async function folhaPagamento(){
+    const folhaPagamento = await calculaFolhaPag();
+    const fpg = document.getElementById("fpg");
+    fpg.innerText = "Total: R$"+folhaPagamento;
 }
 
 const btnCadastrar = document.getElementById('btnCadastrar');

@@ -1,4 +1,4 @@
-import { getLista, buscaUm, novo, altera, exclui } from "./acessa_dados_produto.mjs";
+import { getListaProduto, buscaUm, novo, altera, exclui } from "./acessa_dados_produto.mjs";
 import { consultarCEP, calcularFrete, exibirFrete } from "../Frete/acessa_dados_frete.mjs";
 import { getListaitensCarrinho, novoitensCarrinho, alteraitensCarrinho, excluiitensCarrinho } from "../Itenscarrinho/acessa_dados_Itenscarrinho.mjs";
 import { atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio, confereCliente } from "../Carrinho/manipula_interface_carrinho.mjs";
@@ -6,7 +6,7 @@ import { decodeToken } from "../utils/decode.mjs";
 
 async function inserirProdPrincipal() {
     const boxcontainers = document.querySelectorAll('.vitrinePrincipal');
-    const dados = await getLista();
+    const dados = await getListaProduto();
 
     const metade = Math.ceil(dados.length / 2);
     const produtosVitrine1 = dados.slice(0, metade);
@@ -88,7 +88,7 @@ async function inserirProdPrincipal() {
 
 async function inserirProdDestaque() {
     const boxcontainers = document.querySelectorAll('.vitrineDestaque');
-    const dados = await getLista();
+    const dados = await getListaProduto();
 
     boxcontainers.forEach(function (boxcont) {
         for (let i = 0; i < dados.length; i++) {
@@ -478,6 +478,152 @@ async function iniciarCheckout() {
     }
 }
 
+let indiceSelecionado = -1;
+
+async function salvar() {
+    const iptNome = document.getElementById('nome');
+    const iptDescricao = document.getElementById('descricao');
+    const iptPreco = document.getElementById('preco');
+    const iptRate = document.getElementById('rate');
+    const iptImageUrl = document.getElementById('image_url');
+    const iptQuantidade = document.getElementById('quantidade');
+
+    if (!iptNome.value || !iptDescricao.value || !iptPreco.value || !iptRate.value || !iptImageUrl.value || !iptQuantidade.value) {
+        alert("Por favor, preencha todos os campos!");
+        return;
+    }
+
+    const preco = parseFloat(iptPreco.value);
+    if (isNaN(preco) || preco <= 0) {
+        alert("O preço deve ser um valor positivo!");
+        return;
+    }
+
+    const quantidade = parseInt(iptQuantidade.value);
+    if (isNaN(quantidade) || quantidade < 0) {
+        alert("A quantidade deve ser um valor não negativo!");
+        return;
+    }
+
+    const obj = {
+        nome: iptNome.value,
+        descricao: iptDescricao.value,
+        preco: preco,
+        rate: parseInt(iptRate.value),
+        image_url: iptImageUrl.value,
+        quantidade: quantidade
+    };
+
+    await novo(obj);
+
+    document.forms[0].reset();
+    desenhaTabela();
+}
+
+async function editar() {
+    const iptId = document.getElementById('id');
+    const iptNome = document.getElementById('nome');
+    const iptDescricao = document.getElementById('descricao');
+    const iptPreco = document.getElementById('preco');
+    const iptRate = document.getElementById('rate');
+    const iptImageUrl = document.getElementById('image_url');
+    const iptQuantidade = document.getElementById('quantidade');
+
+    const obj = {
+        id: iptId.value,
+        nome: iptNome.value,
+        descricao: iptDescricao.value,
+        preco: parseFloat(iptPreco.value),
+        rate: parseInt(iptRate.value),
+        image_url: iptImageUrl.value,
+        quantidade: parseInt(iptQuantidade.value)
+    };
+
+    await altera(obj);
+    document.forms[0].reset();
+    desenhaTabela();
+    iptId.value = "";
+}
+
+function decideSalvarEditar(event) {
+    event.preventDefault();
+    if (document.getElementById('id').value) {
+        editar();
+    } else {
+        salvar();
+    }
+}
+
+async function excluir(event) {
+    const indice = event.target.getAttribute('data-id');
+    await exclui(indice);
+    desenhaTabela();
+}
+
+async function preencheDadosParaEdicao(event) {
+    const id = event.target.getAttribute('data-id');
+    const produto = await buscaUm(id);
+    document.getElementById('id').value = produto.id;
+    document.getElementById('nome').value = produto.nome;
+    document.getElementById('descricao').value = produto.descricao;
+    document.getElementById('preco').value = produto.preco;
+    document.getElementById('rate').value = produto.rate;
+    document.getElementById('image_url').value = produto.image_url;
+    document.getElementById('quantidade').value = produto.quantidade;
+}
+
+async function desenhaTabela() {
+    const tbody = document.getElementById('tbody1');
+    tbody.innerHTML = '';
+    const dados = await getListaProduto();
+    for (let i = 0; i < dados.length; i++) {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        const td3 = document.createElement('td');
+        const td4 = document.createElement('td');
+        const td5 = document.createElement('td');
+        const td6 = document.createElement('td');
+        const td7 = document.createElement('td');
+
+        const btEd = document.createElement('button');
+        const btEx = document.createElement('button');
+        
+        btEd.innerText = 'Editar';
+        btEd.setAttribute('data-id', dados[i].id);
+        btEd.setAttribute('class', "intra-button");
+        btEd.addEventListener('click', preencheDadosParaEdicao);
+
+        btEx.innerText = 'Excluir';
+        btEx.setAttribute('data-id', dados[i].id);
+        btEx.setAttribute('class', "intra-button");
+        btEx.addEventListener('click', excluir);
+
+        td1.innerText = dados[i].nome;
+        td2.innerText = truncateText(dados[i].descricao, 40);
+        td3.innerText = dados[i].preco;
+        td4.innerText = dados[i].rate;
+        td5.innerText = dados[i].image_url;
+        td6.innerText = dados[i].quantidade;
+        td7.append(btEd, btEx);
+
+        tr.append(td1, td2, td3, td4, td5, td6, td7 );
+
+        tbody.append(tr);
+    }
+}
+
+function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text;
+}
+
+const btnCadastrar = document.getElementById('btnCadastrar');
+if(btnCadastrar){
+    btnCadastrar.addEventListener('click', decideSalvarEditar);
+}
 
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -501,9 +647,9 @@ window.addEventListener('DOMContentLoaded', async () => {
             const { idCliente } = decodeToken(token);
             await carregarCarrinho(idCliente);
             break;
-        // case "/Carrinho/paginaCarrinho.html":
-        //         desenhaTabela();
-        //     break;
+        case "/Produto/produtos.html":
+                desenhaTabela();
+            break;
         default:
             console.warn(`Nenhuma ação associada ao caminho: ${path}`);
             break;

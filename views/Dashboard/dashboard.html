@@ -26,12 +26,7 @@
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="#">
-                        <h3>Relatórios</h3>
-                    </a>
-                </div>
-                <div class="menuitem">
-                    <a href="#">
+                    <a href="../Venda/venda.html">
                         <h3>Vendas</h3>
                     </a>
                 </div>
@@ -54,12 +49,12 @@
         </div>
         <div class="dashboardMain">
             <h1>Dashboard The Lux</h1>
-
             <div class="filtro-data">
                 <input type="date" name="filtro" id="dataInicio">
                 <input type="date" name="filtro" id="dataFim">
+                <button id="btnFiltro">Filtrar</button>
             </div>
-
+            <h2>Dados Gerais</h2>
             <div class="indicesFinanceiros">
                 <div class="indice-content">
                     <div class="indice-icon i1">
@@ -67,8 +62,8 @@
                     </div>
                     <div class="indice">
                         <div>
-                            <span>Título Índice</span>
-                            <h3>R$ 10000,00</h3>
+                            <span>Lucro Bruto</span>
+                            <h3 id="indiceBruto"></h3>
                         </div>
                         <div class="progresso">
                             <div class="chart-container">
@@ -83,8 +78,8 @@
                     </div>
                     <div class="indice">
                         <div>
-                            <span>Título Índice</span>
-                            <h3>R$ 10000,00</h3>
+                            <span>Lucro Líquido</span>
+                            <h3 id="indiceLiquido"></h3>
                         </div>
                         <div class="progresso">
                             <div class="chart-container">
@@ -93,14 +88,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="indice-content">
+                <div class="indice-content despesa">
                     <div class="indice-icon i3">
                         <img src="../images/crescimento.png" alt="">
                     </div>
                     <div class="indice">
                         <div>
-                            <span>Título Índice</span>
-                            <h3>R$ 10000,00</h3>
+                            <span>Despesas Totais</span>
+                            <h3 id="indiceDespesa"></h3>
+                            <div id="cardDespesa" class="card-despesa oculto">
+                                <p id="custoMt"></p>
+                                <p id="custoMte"></p>
+                                <p id="folhaPag"></p>
+                            </div>
                         </div>
                         <div class="progresso">
                             <div class="chart-container">
@@ -108,52 +108,27 @@
                             </div>
                         </div>
                     </div>
+                    <span>*exibe detalhes</span>
                 </div>
             </div>
 
             <div class="tabela">
-                <h2>Funcionários Cadastrados</h2>
-                <table> 
-                    <thead>
-                     <tr>
-                       <th>Cliente</th>
-                       <th>Total</th>
-                       <th>Data Venda</th>
-                       <th>Status</th>
-                     </tr>
-                    </thead>
-                     <tbody id="tbody1">
-                        <tr>
-                         <td>Kaio Dias</td>
-                         <td>27500,00</td>
-                         <td>03/01/2025</td>
-                         <td class="warning">Concluida</td>
-                         <td class="primary">Detalhes</td>
-                       </tr>
-                        <tr>
-                         <td>Kaio Dias</td>
-                         <td>27500,00</td>
-                         <td>03/01/2025</td>
-                         <td class="warning">Concluida</td>
-                         <td class="primary">Detalhes</td>
-                       </tr>
-                        <tr>
-                         <td>Kaio Dias</td>
-                         <td>27500,00</td>
-                         <td>03/01/2025</td>
-                         <td class="warning">Concluida</td>
-                         <td class="primary">Detalhes</td>
-                       </tr>
-                        <tr>
-                         <td>Kaio Dias</td>
-                         <td>27500,00</td>
-                         <td>03/01/2025</td>
-                         <td class="warning">Concluida</td>
-                         <td class="primary">Detalhes</td>
-                       </tr>
-                     </tbody>
-                </table>
-             </div>
+                <h2>Vendas Recentes</h2>
+                <div class="scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Data Venda</th>
+                                <th>Payment Intent</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody1">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="dashboardDireita">
             <div class="perfil-content">
@@ -167,40 +142,41 @@
             </div>
             <div class="pfc">
                 <h3>Cadastrados</h2>
-                <div class="pfc-content">
-                    <img src="../images/produto.png" alt="produto">
-                    <span> 1200 Produtos cadastrados</span>
-                </div>
-                <div class="pfc-content">
-                    <img src="../images/funcionarios.png" alt="produto">
-                    <span> 40 Funcionarios cadastrados</span>
-                </div>
-                <div class="pfc-content">
-                    <img src="../images/funcionarios.png" alt="produto">
-                    <span> 1000 Clientes cadastrados</span>
-                </div>
+                    <div class="pfc-content">
+                        <img src="../images/produto.png" alt="produto">
+                        <span id="pfcProd"></span>
+                    </div>
+                    <div class="pfc-content">
+                        <img src="../images/funcionarios.png" alt="funcionarios">
+                        <span id="pfcFunc"></span>
+                    </div>
+                    <div class="pfc-content">
+                        <img src="../images/funcionarios.png" alt="clientes">
+                        <span id="pfcCli"></span>
+                    </div>
             </div>
             <div class="indiceVendas">
                 <h3>Índices de Vendas</h2>
-                <div class="indice-item">
-                    <img src="../images/crescimento.png" alt="">
-                    <span>50000 Vendas Concluídas</span>
-                </div>
+                    <div class="indice-item">
+                        <img src="../images/crescimento.png" alt="concluidas" class="imgConcluidas">
+                        <span id="concluidas"></span>
+                    </div>
 
-                <div class="indice-item">
-                    <img src="../images/devolvidas.png" alt="">
-                    <span>50000 Vendas Reembolsadas</span>
-                </div>
+                    <div class="indice-item">
+                        <img src="../images/devolvidas.png" alt="reembolsadas" class="imgReembolsadas">
+                        <span id="reembolsadas"></span>
+                    </div>
 
-                <div class="indice-item">
-                    <img src="../images/canceladas.png" alt="">
-                    <span>50000 Vendas Canceladas</span>
-                </div>
+                    <div class="indice-item">
+                        <img src="../images/canceladas.png" alt="canceladas" class="imgCanceladas">
+                        <span id="canceladas"></span>
+                    </div>
             </div>
         </div>
     </div>
-<!-- vendas reembolsadas, concluidas e canceladas -->
 </body>
-<script src="./dashboard.mjs"></script>
+<script src="./manipula_interface_dashboard.mjs" type="module"></script>
+<script type="module" src="../Venda/manipula_interface_venda.mjs"></script>
+<script type="module" src="../utils/calculaRegistro.mjs"></script>
 
 </html>

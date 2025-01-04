@@ -26,12 +26,12 @@
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="../Venda/venda.html">
+                    <a href="./venda.html">
                         <h3>Vendas</h3>
                     </a>
                 </div>
                 <div class="menuitem">
-                    <a href="./funcionarios.html">
+                    <a href="../Funcionario/funcionarios.html">
                         <h3>Funcionários</h3>
                     </a>
                 </div>
@@ -48,52 +48,26 @@
             </div>
         </div>
         <div class="dashboardMain">
-            <h1>Funcionários</h1>
-            <h2>Cadastro</h2>
-            <div class="cadastro">
-                <form class="dados-cadastro">
-                    <input type="hidden" name="id" id="id">
-                    <div class="separa">
-                        <div class="dado">
-                            <label for="nome">Nome</label>
-                            <input type="text" name="nome" id="nome">
-                        </div>
-                        <div class="dado">
-                            <label for="cargo">Cargo</label>
-                            <input type="text" name="cargo" id="cargo">
-                        </div>
-                        <div class="dado">
-                            <label for="nome">Salário</label>
-                            <input type="text" name="salario" id="salario">
-                        </div>
-                        <div class="dado">
-                            <label for="nome">Cpf</label>
-                            <input type="text" name="cpf" id="cpf">
-                        </div>
-                    </div>
-
-                    <div class="separa">
-                        <div class="dado">
-                            <label for="nome">Senha</label>
-                            <input type="text" name="senha" id="senha">
-                        </div>
-                        <div>
-                            <button class="btnCadastrar" id="btnCadastrar">Cadastrar</button>
-                        </div>
-                    </div>
-                </form>
+            <h1>Vendas</h1>
+            <h2>Dados de Vendas</h2>
+            <div class="grafico">
+                <div class="filtro-data">
+                    <input type="date" name="filtro" id="dataInicio">
+                    <input type="date" name="filtro" id="dataFim">
+                    <button id="btnFiltro">Filtrar</button>
+                </div>
+                <canvas id="grafico1" width="800" height="230"></canvas>
             </div>
             <div class="tabela">
-                <h2>Lista de Funcionários</h2>
-                <div class="scroll">
+                <h2>Vendas Recentes</h2>
+                <div class="scrollSmall">
                     <table>
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Cargo</th>
-                                <th>Salário</th>
-                                <th>CPF</th>
-                                <th>Senha</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Data Venda</th>
+                                <th>Payment Intent</th>
                             </tr>
                         </thead>
                         <tbody id="tbody1">
@@ -105,41 +79,49 @@
         <div class="dashboardDireita">
             <div class="perfil-content">
                 <div class="perfil-info">
-                    <span class="nome">Kaio Dias</span>
+                    <span class="Total">Kaio Dias</span>
                     <p class="cargo">Administrador</p>
                 </div>
                 <a href="#" class="perfil-image">
                     <img src="../images/fotoPerfil.jpg" alt="perfil">
                 </a>
             </div>
+            <div class="indiceVendas">
+                <h3>Dados</h2>
+                <div class="indice-item">
+                    <img src="../images/crescimento.png" alt="vendasConcluidas" class="imgConcluidas">
+                    <span id="concluidas"></span>
+                </div>
+
+                <div class="indice-item">
+                    <img src="../images/devolvidas.png" alt="vendasReembolsadas" class="imgReembolsadas">
+                    <span id="reembolsadas"></span>
+                </div>
+
+                <div class="indice-item">
+                    <img src="../images/canceladas.png" alt="vendasCanceladas" class="imgCanceladas">
+                    <span id="canceladas"></span>
+                </div>
+            </div>
             <div class="pfc">
                 <h3>Cadastrados</h2>
                 <div class="pfc-content">
                     <img src="../images/produto.png" alt="produto">
-                    <span id="pfcProd"> 1200 Produtos cadastrados</span>
+                    <span id="pfcProd"></span>
                 </div>
                 <div class="pfc-content">
                     <img src="../images/funcionarios.png" alt="funcionarios">
-                    <span id="pfcFunc"> 40 Funcionarios cadastrados</span>
+                    <span id="pfcFunc"></span>
                 </div>
                 <div class="pfc-content">
                     <img src="../images/funcionarios.png" alt="clientes">
-                    <span id="pfcCli"> 1000 Clientes cadastrados</span>
-                </div>
-            </div>
-            <div class="folhaPagamento">
-                <h3>Folha de Pagamento</h2>
-                <div class="fpg-item">
-                    <img src="../images/money.png" alt="produto">
-                    <span id="fpg"></span>
+                    <span id="pfcCli"></span>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script src="./dashboard.mjs"></script>
-<script src="./manipula_interface_funcionario.mjs" type="module"></script>
-<script src="../Venda/manipula_interface_venda.mjs" type="module"></script>
+<script src="./manipula_interface_venda.mjs" type="module"></script>
 <script type="module" src="../utils/calculaRegistro.mjs"></script>
 
 </html>
