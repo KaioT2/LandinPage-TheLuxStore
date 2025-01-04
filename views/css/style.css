@@ -907,13 +907,13 @@ footer hr {
     background-color: #cacaca;
 }
 
-.oculto {
+.oculta {
     opacity: 0;
     pointer-events: none;
     display: none;
 }
 
-.visivel {
+.visivel1 {
     opacity: 1;
     pointer-events: auto;
     display: auto;

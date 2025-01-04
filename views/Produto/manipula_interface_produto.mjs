@@ -263,12 +263,12 @@ async function preencheTelaProd(id) {
             const productId = new URLSearchParams(window.location.search).get('id');
             inserirProdCarrinho(productId);
 
-            notificacao.classList.remove('oculto');
-            notificacao.classList.add('visivel');
+            notificacao.classList.remove('oculta');
+            notificacao.classList.add('visivel1');
 
             setTimeout(() => {
-                notificacao.classList.remove('visivel');
-                notificacao.classList.add('oculto');
+                notificacao.classList.remove('visivel1');
+                notificacao.classList.add('oculta');
             }, 3000);
         }
     });
