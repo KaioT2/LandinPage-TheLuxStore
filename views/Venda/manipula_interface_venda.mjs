@@ -1,4 +1,4 @@
-import { getLista } from "./acessa_dados_venda.mjs";
+import { getLista, altera } from "./acessa_dados_venda.mjs";
 
 async function desenhaTabela() {
     const tbody = document.getElementById('tbody1');
@@ -27,6 +27,8 @@ async function desenhaTabela() {
         return incluir;
     });
 
+    dadosFiltrados.sort((a, b) => new Date(b.dataVenda) - new Date(a.dataVenda));
+
     let totalConcluidas = 0;
     let totalCanceladas = 0;
     let totalReembolsadas = 0;
@@ -37,12 +39,57 @@ async function desenhaTabela() {
         const td2 = document.createElement('td');
         const td3 = document.createElement('td');
         const td4 = document.createElement('td');
+        const td5 = document.createElement('td');
+        const btReembolso = document.createElement("button");
+
+        btReembolso.innerText = 'Reembolsar';
+        btReembolso.setAttribute('data-id', dados[i].id);
+        btReembolso.setAttribute('class', "intra-button");
+        btReembolso.addEventListener('click', async () => {
+            const paymentIntentId = dadosFiltrados[i].paymentIntent;
+            try {
+                const obj = {
+                    "id": dadosFiltrados[i].id,
+                    "total": dadosFiltrados[i].total,
+                    "dataVenda": dadosFiltrados[i].dataVenda,
+                    "idCliente": dadosFiltrados[i].Cliente.id,
+                    "paymentIntent": "reembolsada"
+                };
+                await altera(obj);
+
+                const response = await fetch('/refund', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ paymentIntentId })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    alert('Reembolso realizado com sucesso!');
+                    desenhaTabela(); 
+                } else {
+                    alert('Erro ao realizar o reembolso: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Erro ao realizar o reembolso:', error);
+                alert('Erro ao realizar o reembolso.');
+            }
+        });
 
         td1.innerText = dadosFiltrados[i].Cliente.nome;
         td2.innerText = "R$"+parseFloat(dadosFiltrados[i].total).toFixed(2);
-        td3.innerText = dadosFiltrados[i].dataVenda.split('T')[0];
+        td3.innerText = new Date(dadosFiltrados[i].dataVenda).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
         td4.innerText = dadosFiltrados[i].paymentIntent;
-        
+
+        if (!dadosFiltrados[i].paymentIntent.includes("cancelada") && !dadosFiltrados[i].paymentIntent.includes("reembolsada")) {
+            td5.append(btReembolso);
+        }
+
         if (dadosFiltrados[i].paymentIntent.includes("cancelada")) {
             td4.style.color = "red";
             totalCanceladas += parseFloat(dadosFiltrados[i].total);
@@ -54,7 +101,7 @@ async function desenhaTabela() {
             totalConcluidas += parseFloat(dadosFiltrados[i].total);
         }
 
-        tr.append(td1, td2, td3, td4);
+        tr.append(td1, td2, td3, td4, td5);
         tbody.append(tr);
     }
 

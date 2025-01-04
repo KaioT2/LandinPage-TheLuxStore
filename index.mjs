@@ -136,19 +136,18 @@ app.post('/refund', async (req, res) => {
     }
   
     try {
-      // Recupera o PaymentIntent
+
       const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
   
-      // Recupera os reembolsos associados, se existirem
       const refunds = await stripe.refunds.list({
         payment_intent: paymentIntentId,
       });
   
       res.status(200).json({
         success: true,
-        status: paymentIntent.status, // Status do pagamento
-        amount_received: paymentIntent.amount_received / 100, // Valor recebido (convertido de centavos)
-        refunds: refunds.data, // Lista de reembolsos
+        status: paymentIntent.status,
+        amount_received: paymentIntent.amount_received / 100, 
+        refunds: refunds.data, 
       });
     } catch (error) {
       console.error('Erro ao buscar o status da compra:', error);

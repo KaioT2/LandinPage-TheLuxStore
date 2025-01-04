@@ -8,6 +8,4 @@ async function atualizarVendaSemPaymentIntent(paymentIntentId) {
     }
 }
 
-
-
 export { atualizarVendaSemPaymentIntent };
