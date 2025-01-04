@@ -1,4 +1,4 @@
-import { buscaUm, getLista } from "./acessa_dados_produto.mjs";
+import { getLista, buscaUm, novo, altera, exclui } from "./acessa_dados_produto.mjs";
 import { consultarCEP, calcularFrete, exibirFrete } from "../Frete/acessa_dados_frete.mjs";
 import { getListaitensCarrinho, novoitensCarrinho, alteraitensCarrinho, excluiitensCarrinho } from "../Itenscarrinho/acessa_dados_Itenscarrinho.mjs";
 import { atualizaTotalCarrinho, carregarCarrinho, limparCarrinho, guardafrete, pegaCarrinho, carregarDadosPagamento, contarProdutosCarrinho, carrinhoVazio, confereCliente } from "../Carrinho/manipula_interface_carrinho.mjs";
@@ -478,6 +478,8 @@ async function iniciarCheckout() {
     }
 }
 
+
+
 window.addEventListener('DOMContentLoaded', async () => {
     const path = window.location.pathname;
 
@@ -499,6 +501,9 @@ window.addEventListener('DOMContentLoaded', async () => {
             const { idCliente } = decodeToken(token);
             await carregarCarrinho(idCliente);
             break;
+        // case "/Carrinho/paginaCarrinho.html":
+        //         desenhaTabela();
+        //     break;
         default:
             console.warn(`Nenhuma ação associada ao caminho: ${path}`);
             break;

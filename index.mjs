@@ -12,6 +12,7 @@ import rotas_itensVendas from './rotas/rotas_itensVendas.mjs';
 import rotas_carrinho from './rotas/rotas_carrinho.mjs';
 import rotas_itensCarrinho from './rotas/rotas_item_carrinho.mjs';
 import rotas_endereco from './rotas/rotas_endereco.mjs';
+import rotas_funcionarios from './rotas/rotas_funcionarios.mjs';
 
 import { atualizarVendaSemPaymentIntent } from './views/utils/setPaymentIntent.mjs';
 
@@ -31,6 +32,7 @@ app.use('/carrinhos', rotas_carrinho);
 app.use('/itensCarrinho', rotas_itensCarrinho);
 app.use('/carrinho', rotas_carrinho);
 app.use('/endereco', rotas_endereco);
+app.use('/funcionarios', rotas_funcionarios);
 
 app.use(express.static('views'));
 

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <meta name="author" content="Kaio Dias">
+
+    <link rel="icon" href="../images/logo.png" type="image/x-icon" style="border-radius: 50%;">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>The Lux Style</title>
+</head>
+
+<body>
+    <div class="dashboardContent">
+        <div class="menu-lateral">
+            <div class="logo-menu">
+                <a href="../index.html"><img src="../images/logoPreto.png" alt="logo"></a>
+            </div>
+            <div class="menu-lateral-content">
+                <div class="menuitem">
+                    <a href="../Dashboard/dashboard.html">
+                        <h3>Dashboard</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Relatórios</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>Vendas</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="./funcionarios.html">
+                        <h3>Funcionários</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="../Produto/produtos.html">
+                        <h3>Produtos</h3>
+                    </a>
+                </div>
+                <div class="menuitem">
+                    <a href="#">
+                        <h3>LogOut</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dashboardMain">
+            <h1>Funcionários</h1>
+            <h2>Cadastro</h2>
+            <div class="cadastro">
+                <form class="dados-cadastro">
+                    <input type="hidden" name="id" id="id">
+                    <div class="separa">
+                        <div class="dado">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome">
+                        </div>
+                        <div class="dado">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" name="cargo" id="cargo">
+                        </div>
+                        <div class="dado">
+                            <label for="nome">Salário</label>
+                            <input type="text" name="salario" id="salario">
+                        </div>
+                    </div>
+
+                    <div class="separa">
+                        <div class="dado">
+                            <label for="nome">Cpf</label>
+                            <input type="text" name="cpf" id="cpf">
+                        </div>
+                        <div class="dado">
+                            <label for="nome">Senha</label>
+                            <input type="text" name="senha" id="senha">
+                        </div>
+                        <div>
+                            <button class="btnCadastrar" id="btnCadastrar">Cadastrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tabela">
+                <h2>Lista de Funcionários</h2>
+                <div class="scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cargo</th>
+                                <th>Salário</th>
+                                <th>CPF</th>
+                                <th>Senha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody1">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="dashboardDireita">
+            <div class="perfil-content">
+                <div class="perfil-info">
+                    <span class="nome">Kaio Dias</span>
+                    <p class="cargo">Administrador</p>
+                </div>
+                <a href="#" class="perfil-image">
+                    <img src="../images/fotoPerfil.jpg" alt="perfil">
+                </a>
+            </div>
+            <div class="pfc">
+                <h3>Cadastrados</h2>
+                    <div class="pfc-content">
+                        <img src="../images/produto.png" alt="produto">
+                        <span> 1200 Produtos cadastrados</span>
+                    </div>
+                    <div class="pfc-content">
+                        <img src="../images/funcionarios.png" alt="produto">
+                        <span> 40 Funcionarios cadastrados</span>
+                    </div>
+                    <div class="pfc-content">
+                        <img src="../images/funcionarios.png" alt="produto">
+                        <span> 1000 Clientes cadastrados</span>
+                    </div>
+            </div>
+            <div class="indiceVendas">
+                <h3>Índices de Vendas</h2>
+                    <div class="indice-item">
+                        <img src="../images/crescimento.png" alt="">
+                        <span>50000 Vendas Concluídas</span>
+                    </div>
+
+                    <div class="indice-item">
+                        <img src="../images/devolvidas.png" alt="">
+                        <span>50000 Vendas Reembolsadas</span>
+                    </div>
+
+                    <div class="indice-item">
+                        <img src="../images/canceladas.png" alt="">
+                        <span>50000 Vendas Canceladas</span>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./dashboard.mjs"></script>
+<script src="./manipula_interface_funcionario.mjs" type="module" ></script>
+
+</html>

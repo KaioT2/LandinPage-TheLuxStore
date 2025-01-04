@@ -1500,15 +1500,15 @@ footer hr {
     stroke-dasharray: 150;
 }
 
-.tabelaVendas{
+.tabela{
     margin-top: 30px;
 }
 
-.tabelaVendas h2{
+.tabela h2{
     margin-bottom: 10px;
 }
 
-.tabelaVendas table{
+.tabela table{
     background: #fff;
     width: 100%;
     border-radius: 30px;
@@ -1518,16 +1518,16 @@ footer hr {
     transition: all .3s ease;
     color: #363949;
 }
-.tabelaVendas table:hover{
+.tabela table:hover{
     box-shadow: none;
 }
 
-.tabelaVendas table tbody td{
+.tabela table tbody td{
     height: 3.5rem;
     border-bottom: 1px solid #fff;
     color:#677483;
  }
-.tabelaVendas table tbody tr:last-child td{
+.tabela table tbody tr:last-child td{
     border: none;
  }
 
@@ -1630,6 +1630,70 @@ footer hr {
     height: 50px;
     background-color: #ff592f;
     border-radius: 50%;
+ }
+
+ /* DASHBOARD - Funcionários */
+
+ .dados-cadastro{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #fff;
+ }
+
+ .separa{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+ }
+
+ .dado{
+    display: flex;
+    flex-direction: column;
+ }
+
+ .dado input{
+    border: solid 1px #232222;
+    height: 40px;
+    border-radius: 30px;
+    padding-left: 10px;
+ }
+
+ .btnCadastrar{
+    margin-top: 25px;
+    background-color: #0089f8;
+    width: 100px ;
+    height: 40px;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: 700;
+ }
+
+ .btnCadastrar:hover{
+    background-color: #005f9f;
+ }
+
+ .scroll{
+    overflow-y: auto;
+    max-height: 320px;
+    border-radius: 30px;
+ }
+
+ .intra-button{
+    text-align: center;
+    background-color: #0089f8;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    margin-right: 5px;
+ }
+
+ .intra-button:hover{
+    background-color: #005f9f;
  }
 
 /* Responsividade */
