@@ -159,8 +159,6 @@ app.post('/refund', async (req, res) => {
     }
   });
   
-  
-
 app.listen(80, () => {
     console.log('Servidor escutando na porta 80');
 });

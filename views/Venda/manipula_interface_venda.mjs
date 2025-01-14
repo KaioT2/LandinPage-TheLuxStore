@@ -213,6 +213,21 @@ async function criaGrafico() {
     });
 }
 
+const limparFiltros = () => {
+    const dataInicio = document.getElementById("dataInicio");
+    const dataFim = document.getElementById("dataFim");
+    if (dataInicio) dataInicio.value = "";
+    if (dataFim) dataFim.value = "";
+
+    desenhaTabela();
+    criaGrafico();
+};
+
+const btnLimparFiltros = document.getElementById('btnLimparFiltros');
+if (btnLimparFiltros) {
+    btnLimparFiltros.addEventListener('click', limparFiltros);
+}
+
 const btnFiltro = document.getElementById('btnFiltro');
 if (btnFiltro) {
     btnFiltro.addEventListener('click', criaGrafico);

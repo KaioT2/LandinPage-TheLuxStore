@@ -1812,6 +1812,22 @@ footer hr {
     background-color: #005f9f;
  }
 
+ #btnLimparFiltros {
+    text-align: center;
+    background-color: #0089f8;
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-bottom: 5px;
+ }
+
+ #btnLimparFiltros:hover{
+    background-color: #005f9f;
+ }
+
  .scrollSmall{
     overflow-y: auto;
     max-height: 230px;

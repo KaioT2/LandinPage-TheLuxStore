@@ -9,6 +9,38 @@ const iptSenha = document.querySelector("#senha");
 
 const btnCriar = document.querySelector("#btnCriar");
 
+function validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, ""); 
+
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+        return false; 
+    }
+
+    let soma = 0, resto;
+
+    for (let i = 1; i <= 9; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        return false;
+    }
+
+    soma = 0;
+    
+    for (let i = 1; i <= 10; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        return false;
+    }
+
+    return true;
+}
+
 async function criarConta() {
     document.querySelectorAll(".msg-erro").forEach(msg => msg.remove());
 
@@ -33,8 +65,8 @@ async function criarConta() {
         valid = false;
     }
 
-    if (!iptCpf.value.trim()) {
-        criarMensagemErro(iptCpf, "Por favor, preencha o CPF.");
+    if (!iptCpf.value.trim() || !validarCPF(iptCpf.value)) {
+        criarMensagemErro(iptCpf, "Por favor, preencha um CPF válido.");
         valid = false;
     }
 
@@ -59,7 +91,7 @@ async function criarConta() {
 
     const clienteExistente = await verificaClienteExistente(iptEmail.value, iptCpf.value);
     if (clienteExistente) {
-        alert("Usuário já existe!")
+        alert("Usuário já existe!");
         return;
     }
 
@@ -70,12 +102,12 @@ async function criarConta() {
         email: iptEmail.value,
         dataNasc: iptdataNasc.value,
         senha: iptSenha.value
-    }
+    };
 
     await novoclientes(obj);
 
-    await login({email: iptEmail.value, senha: iptSenha.value});
-    window.location.href = '../index.html';
+    await login({ email: iptEmail.value, senha: iptSenha.value });
+    window.location.href = "../index.html";
 }
 
 btnCriar.addEventListener("click", criarConta);
